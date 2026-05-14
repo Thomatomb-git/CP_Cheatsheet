@@ -1,4 +1,3 @@
-
 template<typename T>
 T extended_euclid(T a, T b, T& x, T& y) {
   if(b == 0) {
