@@ -29,6 +29,7 @@ bool miller_rabin(ll n){ // O(k * log n)
     return true;
 }
 
+// output random factor of n
 ll pollard_rho (ll n){ // O(n^(1/4) log n)
     if (n % 2 == 0) return 2;
     if (n == 1) return 1;
