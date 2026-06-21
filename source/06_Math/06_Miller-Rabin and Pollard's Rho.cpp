@@ -1,85 +1,69 @@
-namespace MillerRabin {
-  const vector<ll> primes = { // deterministic up to 2^64 - 1
-    2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37
-  };
-  ll gcd(ll a, ll b) {
-    return b ? gcd(b, a % b) : a;
-  }
-  ll powa(ll x, ll y, ll p) { // (x ^ y) % p
-    if(!y)
-      return 1;
-    if(y & 1)
-      return ((__int128) x * powa(x, y - 1, p)) % p;
-    ll temp = powa(x, y >> 1, p);
-    return ((__int128) temp * temp) % p;
-  }
-  bool miller_rabin(ll n, ll a, ll d, int s) {
-    ll x = powa(a, d, n);
-    if(x == 1 || x == n - 1)
-      return 0;
-    for(int i = 0; i < s; ++i) {
-      x = ((__int128) x * x) % n;
-      if(x == n - 1)
-        return 0;
+// Pre : fast expo
+// prime = true, composite = false
+bool miller_rabin(ll n){ // O(k * log n)
+    if (n == 1) return false;
+    ll d = n-1;
+    ll s = 0;
+    while (d % 2 == 0){
+        s++;
+        d /= 2;
     }
-    return 1;
-  }
-  bool is_prime(ll x) { // use this
-    if(x < 2)
-      return 0;
-    int r = 0;
-    ll d = x - 1;
-    while((d & 1) == 0) {
-      d >>= 1;
-      ++r;
+    vector<ll> base = {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37}; //deterministic up to 2^64 - 1
+    for (auto a : base){
+        if (n <= a) break;
+
+        ll x = fast(a, d, n);
+        if (x == 1 || x == n-1) continue;
+
+        bool comp = true;
+        for (ll r = 1; r < s; r++){
+            x = ((u128)x * x) % n;
+            if (x == n-1){
+                comp = false;
+                break;
+            }
+        }
+
+        if (comp) return false;
     }
-    for(auto& i : primes) {
-      if(x == i)
-        return 1;
-      if(miller_rabin(x, i, d, r))
-        return 0;
-    }
-    return 1;
-  }
+    return true;
 }
 
-namespace PollardRho {
-  mt19937_64 generator(chrono::steady_clock::now()
-                       .time_since_epoch().count());
-  uniform_int_distribution<ll> rand_ll(0, LLONG_MAX);
-  ll f(ll x, ll b, ll n) { // (x^2 + b) % n
-    return (((__int128) x * x) % n + b) % n;
-  }
-  ll rho(ll n) {
-    if(n % 2 == 0)
-      return 2;
-    ll b = rand_ll(generator);
-    ll x = rand_ll(generator);
-    ll y = x;
-    while(1) {
-      x = f(x, b, n);
-      y = f(f(y, b, n), b, n);
-      ll d = MillerRabin::gcd(abs(x - y), n);
-      if(d != 1)
-        return d;
+ll pollard_rho (ll n){ // O(n^(1/4) log n)
+    if (n % 2 == 0) return 2;
+    if (n == 1) return 1;
+
+    ll turtle = 2; // turtle, hare, c can be randomize
+    ll hare = 2;
+    ll c = 1; // f(x) = (x^2 + c) mod n
+    ll d = 1;
+
+    while (d == 1){
+        turtle = (((u128)turtle * turtle) + c) % n;
+        hare = (((u128)hare * hare) + c) % n;
+        hare = (((u128)hare * hare) + c) % n;
+
+        d = gcd(n, llabs(turtle - hare));
+
+        if (d == n){
+            c++;
+            turtle = 2;
+            hare = 2;
+            d = 1;
+        }
     }
-  }
-  void pollard_rho(ll n, vector<ll>& res) {
-    if(n == 1)
-      return;
-    if(MillerRabin::is_prime(n)) {
-      res.push_back(n);
-      return;
+    return d;
+}
+
+void factor(ll n, vector<ll> &ans){ // O(n^(1/4) log n)
+    if (n > 1){
+        if (miller_rabin(n)){
+            ans.push_back(n);
+            return;
+        }
+
+        ll x = pollard_rho(n);
+        factor(x, ans);
+        factor(n/x, ans);
     }
-    ll d = rho(n);
-    pollard_rho(d, res);
-    pollard_rho(n / d, res);
-  }
-  vector<ll> factorize(ll n, bool sorted = 1) { // use this
-    vector<ll> res;
-    pollard_rho(n, res);
-    if(sorted)
-      sort(res.begin(), res.end());
-    return res;
-  }
 }
