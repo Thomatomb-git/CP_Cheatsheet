@@ -1,8 +1,8 @@
-// max li-chao tree
-// works for the range [0, MAX - 1]
-// if min li-chao tree:
-// replace every call to max() with min() and every > with <
-// also replace -INF with INF
+// Algoritma/Fungsi: Dynamic Li-Chao Segment Tree untuk query nilai maksimum fungsi linear y = mx + c pada titik x.
+// Kompleksitas Waktu: Insert Garis O(log C), Query Titik O(log C) dengan C adalah rentang koordinat.
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
 
 struct Func {
   ll m, c;

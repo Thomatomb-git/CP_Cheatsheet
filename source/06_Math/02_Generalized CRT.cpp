@@ -1,3 +1,8 @@
+// Algoritma/Fungsi: Generalized Chinese Remainder Theorem untuk menyelesaikan sistem kongruensi linear dengan modulo yang tidak harus prima relatif.
+// Kompleksitas Waktu: O(log(min(n, m))) per pasang persamaan.
+#include <bits/stdc++.h>
+using namespace std;
+
 template<typename T>
 T extended_euclid(T a, T b, T& x, T& y) {
   if(b == 0) {
@@ -11,11 +16,12 @@ T extended_euclid(T a, T b, T& x, T& y) {
   y = xx - (yy * (a / b));
   return gcd;
 }
+
 template<typename T>
 T MOD(T a, T b) {
   return (a % b + b) % b;
 }
-// return x, lcm. x = a % n && x = b % m
+
 template<typename T>
 pair<T, T> CRT(T a, T n, T b, T m) {
   T _n, _m;

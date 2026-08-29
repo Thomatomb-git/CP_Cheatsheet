@@ -1,3 +1,5 @@
+% Algoritma/Fungsi: Definisi fungsi Mobius \mu(n) dan prekomputasi menggunakan Linear Sieve O(N).
+% Kompleksitas Waktu: O(N) linier.
 For any positive integer $n$,
 \[
 \mu(n) = 
@@ -7,21 +9,31 @@ For any positive integer $n$,
 (-1)^k & \text{if } n \text{ is the product of } k \text{ distinct primes. } \square
 \end{cases}
 \]
-\begin{lstlisting}
+\begin{lstlisting}[language=c++]
+  const int N = 1e6;
   int mobius[N + 1];
-  void precompute_mobius(){
-    for (int i = 1; i <= N; i++) {
-      mobius[i] = 1;
-    }
+  vector<int> primes;
+  bool is_prime[N + 1];
+
+  // Linear Sieve O(N)
+  void precompute_mobius() {
+    fill(is_prime, is_prime + N + 1, true);
+    is_prime[0] = is_prime[1] = false;
+    mobius[1] = 1;
+
     for (int i = 2; i <= N; i++) {
-      if (mobius[i] == 1) {
-        for (int j = i; j <= N; j += i) {
-          if (j % (i * i) == 0) {
-            mobius[j] = 0;
-          }
-          else {
-            mobius[j] *= -1;
-          }
+      if (is_prime[i]) {
+        primes.push_back(i);
+        mobius[i] = -1;
+      }
+      for (int p : primes) {
+        if (i * p > N) break;
+        is_prime[i * p] = false;
+        if (i % p == 0) {
+          mobius[i * p] = 0;
+          break;
+        } else {
+          mobius[i * p] = -mobius[i];
         }
       }
     }

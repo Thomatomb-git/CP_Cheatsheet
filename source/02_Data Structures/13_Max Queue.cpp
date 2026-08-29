@@ -1,4 +1,8 @@
-//For min queue, change every Max to Min, and < to >
+// Algoritma/Fungsi: Monotonic Sliding Window Queue untuk mencari nilai maksimum dalam antrian bergerak secara efisien.
+// Kompleksitas Waktu: Amortized O(1) per operasi add dan remove, O(1) untuk getMax().
+#include <bits/stdc++.h>
+using namespace std;
+
 struct MaxQueue{
   deque<pair<int,int>> q;
   int cntAdd, cntRem;

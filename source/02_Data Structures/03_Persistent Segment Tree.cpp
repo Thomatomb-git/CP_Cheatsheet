@@ -1,3 +1,8 @@
+// Algoritma/Fungsi: Persistent Segment Tree dengan node-copying untuk query range sum pada versi histori masa lalu.
+// Kompleksitas Waktu: Build O(N), Update O(log N), Query O(log N), Memori O(N + Q log N).
+#include <bits/stdc++.h>
+using namespace std;
+
 class PersistentSegtree{
 private:
   int n, ptr, sz;
@@ -34,7 +39,7 @@ private:
       node[idx].l = update(node[idx].l, l, mid, x, val);
     else
       node[idx].r = update(node[idx].r, mid+1, r, x, val);
-      node[idx].val = node[node[idx].l].val + node[node[idx].r].val;
+    node[idx].val = node[node[idx].l].val + node[node[idx].r].val;
     return idx;
   }
   int query(int idxl, int idxr, int l, int r, int x, int y){

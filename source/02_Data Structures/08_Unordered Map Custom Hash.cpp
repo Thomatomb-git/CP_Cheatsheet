@@ -1,3 +1,8 @@
+// Algoritma/Fungsi: Custom Hash SplitMix64 untuk std::unordered_map dan std::unordered_set agar kebal terhadap collision test-case hacks.
+// Kompleksitas Waktu: O(1) hash evaluation, average O(1) unordered_map operations.
+#include <bits/stdc++.h>
+using namespace std;
+
 struct custom_hash {
   static uint64_t splitmix64(uint64_t x) {
     x += 0x9e3779b97f4a7c15;

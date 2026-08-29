@@ -1,20 +1,26 @@
-// Eulerian on Directed Graph
-stack<int> path;
-vector<int> euler;
-inline void hierholzer() {
-  path.push(0);
-  int cur = 0;
-  while(!path.empty()) {
-    if(!adj[cur].empty()) {
-      path.push(cur);
-      int next = adj[cur].back();
-      adj[cur].pob();
-      cur = next;
-    } else {
-      euler.pb(cur);
-      cur = path.top();
-      path.pop();
+// Algoritma/Fungsi: Algoritma Hierholzer untuk mencari lintasan atau siklus Eulerian pada graf berarah.
+// Kompleksitas Waktu: O(V + E).
+#include <bits/stdc++.h>
+using namespace std;
+
+vector<int> hierholzer(int start_node, vector<vector<int>>& adj) {
+    stack<int> path;
+    vector<int> euler;
+    path.push(start_node);
+    int cur = start_node;
+
+    while(!path.empty()) {
+        if(!adj[cur].empty()) {
+            path.push(cur);
+            int nxt = adj[cur].back();
+            adj[cur].pop_back();
+            cur = nxt;
+        } else {
+            euler.push_back(cur);
+            cur = path.top();
+            path.pop();
+        }
     }
-  }
-  reverse(euler.begin(), euler.end());
+    reverse(euler.begin(), euler.end());
+    return euler;
 }

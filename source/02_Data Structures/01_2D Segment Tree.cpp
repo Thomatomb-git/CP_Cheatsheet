@@ -1,3 +1,11 @@
+// Algoritma/Fungsi: 2D Dynamic Segment Tree (Segment Tree of Segment Trees) untuk query nilai minimum 2D dan update titik.
+// Kompleksitas Waktu: Update O(log X log Y), Query O(log X log Y).
+#include <bits/stdc++.h>
+using namespace std;
+
+const int INF = 1e9;
+const int MAX = 1e9;
+
 struct Segtree2D {
   struct Segtree {
     struct node {

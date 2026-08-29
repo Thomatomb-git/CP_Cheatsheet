@@ -1,3 +1,12 @@
+// Algoritma/Fungsi: Disjoint Set Union (DSU) dengan riwayat perubahan untuk mendukung operasi rollback/undo.
+// Kompleksitas Waktu: Find/Join O(log N), Rollback O(1) per operasi yang di-undo.
+#include <bits/stdc++.h>
+using namespace std;
+#define fi first
+#define se second
+typedef vector<int> vi;
+typedef pair<int, int> pii;
+
 struct RollbackUF{
   vi e;
   vector<pii> st;

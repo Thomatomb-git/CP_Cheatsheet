@@ -1,6 +1,8 @@
-// Maximum matching on general graphs in O(V^2 E)
-// Indices are 1-based
-// Stolen from ko_osaga's cheatsheet
+// Algoritma/Fungsi: Algoritma Edmond's Blossom untuk mencari Maximum Cardinality Matching pada graf umum (non-bipartit) 1-based index.
+// Kompleksitas Waktu: O(V^2 * E).
+#include <bits/stdc++.h>
+using namespace std;
+
 struct Blossom {
   vector<int> vis, dad, orig, match, aux;
   vector<vector<int>> conn;
@@ -73,7 +75,7 @@ struct Blossom {
     return false;
   }
 
-  Blossom(int n) : // n = vertices
+  Blossom(int n) :
     vis(n + 1), dad(n + 1), orig(n + 1), match(n + 1),
     aux(n + 1), conn(n + 1), t(0), N(n) {
     for(int i = 0; i <= n; ++i) {
@@ -87,9 +89,9 @@ struct Blossom {
     conn[v].push_back(u);
   }
 
-  int solve() { // call this for answer
+  int solve() {
     int ans = 0;
-    vector<int> V(N - 1);
+    vector<int> V(N);
     iota(V.begin(), V.end(), 1);
     shuffle(V.begin(), V.end(), mt19937(0x94949));
     for(auto x : V) {

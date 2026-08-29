@@ -1,11 +1,12 @@
-/* dp[i] = min k<i {dp[k] + x[i]*m[k]}
-   Make sure gradient (m[i]) is either non-increasing if min,
-   or non-decreasing if max. x[i] must be non-decreasing. just sort */
-int y[N], m[N];
-// while this is true, pop back from dq. a=new line, b=last, c=2nd last
+// Algoritma/Fungsi: Kondisi pengecekan gradien pada Convex Hull Trick (CHT) untuk eliminasi garis non-optimal pada optimasi DP.
+// Kompleksitas Waktu: Amortized O(1) per penambahan garis, keseluruhan DP O(N).
+#include <bits/stdc++.h>
+using namespace std;
+
+const int N = 100005;
+int y_coord[N], m[N];
+
+// Returns true if line b is redundant between line a and line c
 bool cekx(int a, int b, int c) {
-  // if not enough, change to cross mul
-  // if cross mul, beware of negative denominator, and overflow
-  return (double)(y[b] - y[a]) / (m[a] - m[b]) <= (double)(y[c] - y[b]) /
-         (m[b] - m[c]);
+  return (double)(y_coord[b] - y_coord[a]) / (m[a] - m[b]) <= (double)(y_coord[c] - y_coord[b]) / (m[b] - m[c]);
 }

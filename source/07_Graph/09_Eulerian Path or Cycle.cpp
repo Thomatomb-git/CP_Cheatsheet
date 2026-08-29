@@ -1,12 +1,7 @@
-// finds a eulerian path / cycle
-// visits each edge only once
-// properties:
-// - cycle: degrees are even
-// - path: degrees are even OR degrees are even except for 2 vertices
-// how to use: g = adjacency list g[n] = connected to n, undirected
-// if there is a vertex u with an odd degree, call dfs(u)
-// else call on any vertex
-// ans = path result
+// Algoritma/Fungsi: Mencari lintasan/siklus Eulerian pada graf tak berarah sederhana dengan mengunjungi setiap sisi tepat satu kali.
+// Kompleksitas Waktu: O(E log V) menggunakan std::set.
+#include <bits/stdc++.h>
+using namespace std;
 
 vector<set<int>> g;
 vector<int> ans;
@@ -20,4 +15,3 @@ void dfs(int u) {
   }
   ans.push_back(u);
 }
-//Make sure that ans.size() == edges + 1 !!!

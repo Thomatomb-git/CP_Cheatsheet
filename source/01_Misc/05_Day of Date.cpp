@@ -1,6 +1,11 @@
-//0-based
-const vector<int> T= {0,3,2,5,0,3,5,1,4,6,2,4};
-int day(int d, int m, int y){
+// Algoritma/Fungsi: Algoritma Sakamoto untuk menentukan hari dalam seminggu (0 = Minggu, 1 = Senin, ..., 6 = Sabtu) pada kalender Gregorian.
+// Kompleksitas Waktu: O(1).
+#include <bits/stdc++.h>
+using namespace std;
+
+// 0-based: 0 = Sunday, 1 = Monday, ..., 6 = Saturday
+const vector<int> T = {0, 3, 2, 5, 0, 3, 5, 1, 4, 6, 2, 4};
+int day(int d, int m, int y) {
     y -= (m < 3);
-    return (y + y/4 - y/100 + y/400 + T[m-1] +d) % 7;
+    return (y + y / 4 - y / 100 + y / 400 + T[m - 1] + d) % 7;
 }

@@ -25,7 +25,7 @@ gen_clean() {
 
 # generate
 gen_generate() {
-    python3 build.py > contents.tex
+    python build.py > contents.tex
     ./format.sh
     mkdir --parents "${BUILD_DIR}"
 

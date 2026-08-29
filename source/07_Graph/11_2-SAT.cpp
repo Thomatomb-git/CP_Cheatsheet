@@ -1,3 +1,8 @@
+// Algoritma/Fungsi: 2-SAT Solver menggunakan algoritma Kosaraju untuk mencari Strongly Connected Components pada graf implikasi boolean.
+// Kompleksitas Waktu: O(V + E) dengan V jumlah variabel dan E jumlah klausul.
+#include <bits/stdc++.h>
+using namespace std;
+
 struct TwoSAT {
   int n;
   vector<vector<int>> g, gr;
@@ -13,28 +18,20 @@ struct TwoSAT {
     gr[v].push_back(u);
   }
 
-  // For the following three functions
-  // int x, bool val: if 'val' is true, we take the variable to be x.
-  // Otherwise we take it to be x's complement.
-
-  // At least one of them is true
   void add_clause_or(int i, bool f, int j, bool p) {
     add_edge(i + (f ? n : 0), j + (p ? 0 : n));
     add_edge(j + (p ? n : 0), i + (f ? 0 : n));
   }
 
-  // Only one of them is true
   void add_clause_xor(int i, bool f, int j, bool p) {
     add_clause_or(i, f, j, p);
     add_clause_or(i, !f, j, !p);
   }
 
-  // Both of them have the same value
   void add_clause_and(int i, bool f, int j, bool p) {
     add_clause_xor(i, !f, j, p);
   }
 
-  // Topological sort
   void dfs(int u) {
     vis[u] = true;
     for(const auto& v : g[u])
@@ -43,7 +40,6 @@ struct TwoSAT {
     topological_order.push_back(u);
   }
 
-  // Extracting strongly connected components
   void scc(int u, int id) {
     vis[u] = true;
     comp[u] = id;
@@ -53,6 +49,7 @@ struct TwoSAT {
   }
 
   bool satisfiable() {
+    topological_order.clear();
     fill(vis.begin(), vis.end(), false);
     for(int i = 0; i < 2 * n; i++)
       if(!vis[i])
@@ -63,7 +60,6 @@ struct TwoSAT {
     for(const auto& v : topological_order)
       if(!vis[v])
         scc(v, id++);
-    // Constructing the answer
     for(int i = 0; i < n; i++) {
       if(comp[i] == comp[i + n])
         return false;

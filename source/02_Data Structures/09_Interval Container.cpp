@@ -1,4 +1,9 @@
-//KACTL’sIntervalContainer
+// Algoritma/Fungsi: Interval Container menggunakan std::set untuk memelihara himpunan interval disjoint (penambahan dan pengurangan interval).
+// Kompleksitas Waktu: Amortized O(log N) per operasi penambahan/penghapusan interval.
+#include <bits/stdc++.h>
+using namespace std;
+typedef pair<int, int> pii;
+
 set<pii>::iterator addInterval(set<pii> &is, int L, int R){
   if (L == R) return is.end();
   auto it = is.lower_bound({L,R}), before = it;
@@ -13,6 +18,7 @@ set<pii>::iterator addInterval(set<pii> &is, int L, int R){
   }
   return is.insert(before, {L, R});
 }
+
 void removeInterval(set<pii> &is, int L, int R){
   if(L == R) return;
   auto it = addInterval(is, L, R);

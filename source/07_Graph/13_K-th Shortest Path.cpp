@@ -1,33 +1,32 @@
-// k = shortest path ke berapa.
-// n = jumlah vertex.
-// solve(i,j): shortest path dari i ke j.
-const int MAXN = 100;
-const int MAXK = 40;
-vector<pair<int,int>> g[MAXN];
-priority_queue<pair<int,int>> pq;
-int visit[MAXN], n, k;
-int solve(int s, int t){
-  FILL(visit, 0);
-  pq.push(mp(0, s));
-  int ret = 0;
-  while (!pq.empty()){ 
-    int awal = -pq.top().first, f = pq.top().second;
-    pq.pop();
-    if (visit[f] >= k) continue;
-    visit[f]++;
-    if (f == t) ret += awal;
-    for (auto x : g[f]) if (visit[x.first] < k)
-      pq.push(mp(-(awal + x.se), x.first));
-  }
-  return ret;
-}
-int inside_main(){
-  k = GI;
-  n = GI;
-  for (int nedge = 0; nedge < GI; nedge++){
-    int a = GI-1, b = GI-1, c = GI;
-    g[a].pb(mp(b,c));
-    g[b].pb(mp(a,c));
-  }
-  printf("%d\n",solve(0,n-1));
+// Algoritma/Fungsi: Menemukan panjang lintasan terpendek ke-k dari simpul s ke t pada graf berbobot positif menggunakan Priority Queue (Dijkstra-based).
+// Kompleksitas Waktu: O(K * E log(K * V)).
+#include <bits/stdc++.h>
+using namespace std;
+
+const int MAXN = 1005;
+vector<pair<int, int>> g[MAXN];
+int vis_cnt[MAXN];
+
+int kth_shortest_path(int s, int t, int k, int n) {
+    fill(vis_cnt, vis_cnt + n + 1, 0);
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> pq;
+    pq.push({0, s});
+
+    while(!pq.empty()) {
+        auto [d, u] = pq.top();
+        pq.pop();
+
+        if(vis_cnt[u] >= k) continue;
+        vis_cnt[u]++;
+
+        if(u == t && vis_cnt[t] == k)
+            return d;
+
+        for(auto& edge : g[u]) {
+            int v = edge.first, w = edge.second;
+            if(vis_cnt[v] < k)
+                pq.push({d + w, v});
+        }
+    }
+    return -1;
 }

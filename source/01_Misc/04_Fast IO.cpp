@@ -1,39 +1,55 @@
-int read(){
+// Algoritma/Fungsi: Fast I/O membaca dan menulis integer dan string menggunakan low-level I/O tak terkunci (unlocked I/O).
+// Kompleksitas Waktu: O(jumlah digit) per operasi baca/tulis.
+#include <bits/stdc++.h>
+using namespace std;
+
+#ifdef _WIN32
+#define getchar_unlocked _getchar_nolock
+#define putchar_unlocked _putchar_nolock
+#endif
+
+int read() {
     char c;
     do {
         c = getchar_unlocked();
-    } while(c < 33);
+    } while(c <= 32);
     int res = 0, mul = 1;
-    if(c == '-'){
+    if(c == '-') {
         mul = -1;
         c = getchar_unlocked();
     }
-    while('0' <= c && c <= '9'){
-        res = res * 10 + c - '0';
+    while('0' <= c && c <= '9') {
+        res = res * 10 + (c - '0');
         c = getchar_unlocked();
     }
     return res * mul;
 }
 
-void write(int x){
-    static char wbuf[10];
-    if(x < 0){
+void write(long long x) {
+    if(x == 0) {
+        putchar_unlocked('0');
+        return;
+    }
+    if(x < 0) {
         putchar_unlocked('-');
+        if(x == LLONG_MIN) {
+            write((unsigned long long)LLONG_MAX + 1);
+            return;
+        }
         x = -x;
     }
+    char wbuf[25];
     int idx = 0;
-    while(x){
-        wbuf[idx++] = x % 10;
+    while(x > 0) {
+        wbuf[idx++] = (x % 10) + '0';
         x /= 10;
     }
-    if(idx == 0)
-        putchar_unlocked('0');
-    for(int i = idx-1; i >=0; --i)
-        putchar_unlocked(wbuf[i] + '0');
+    for(int i = idx - 1; i >= 0; --i)
+        putchar_unlocked(wbuf[i]);
 }
 
-void write(constchar* s){
-    while(*s){
+void write(const char* s) {
+    while(*s) {
         putchar_unlocked(*s);
         ++s;
     }

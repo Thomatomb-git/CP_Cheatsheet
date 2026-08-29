@@ -1,9 +1,7 @@
-// Complexity: O(log N) for split and merge
-//
-// empty treap: Treap* tr = nullptr;
-// insert v at x: [l, r] = split(tr, x), m = Treap(v), merge lmr
-// delete at x: [l, r] = split(tr, x), [m, r] = split(r, 1), merge lr
-// lazy prop: propagate every time a node is accessed
+// Algoritma/Fungsi: Implicit Treap (Cartesian Tree) untuk manipulasi sequence dengan operasi split by size, merge, insert, dan delete.
+// Kompleksitas Waktu: Split dan Merge O(log N) expected.
+#include <bits/stdc++.h>
+using namespace std;
 
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 

@@ -1,15 +1,15 @@
-// welzl's algo to find the 2d minimum enclosing circle of a set of points
-// expected O(N)
-// directions: remove duplicates and shuffle points, then call welzl(points)
+// Algoritma/Fungsi: Algoritma Welzl teracak untuk mencari Minimum Enclosing Circle (MEC) dari himpunan titik 2D.
+// Kompleksitas Waktu: Expected O(N) dengan pengacakan titik (shuffle).
+#include <bits/stdc++.h>
+using namespace std;
 
 struct Point {
-  double x;
-  double y;
+  double x, y;
 };
 
 struct Circle {
   double x, y, r;
-  Circle() {}
+  Circle() : x(0), y(0), r(-1) {}
   Circle(double _x, double _y, double _r): x(_x), y(_y), r(_r) {}
 };
 
@@ -36,7 +36,7 @@ Circle trivial(const vector<Point>& r) {
   }
 }
 
-// SHUFFLE THE POINTS FIRST!!!!!!
+// SHUFFLE POINTS FIRST: shuffle(p.begin(), p.end(), rng)
 Circle welzl(const vector<Point>& p, int idx = 0, vector<Point> r = {}) {
   if(idx == (int) p.size() || r.size() == 3)
     return trivial(r);

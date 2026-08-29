@@ -1,41 +1,41 @@
-//FOR SOLVING MINIMUM ABS(X) + ABS(Y)
-ll x, y, newX, newY, target = 0;
-ll extGcd(ll a, ll b) {
-  if(b == 0) {
-    x = 1, y = 0;
-    return a;
-  }
-  ll ret = extGcd(b, a % b);
-  newX = y;
-  newY = x - y * (a / b);
-  x = newX;
-  y = newY;
-  return ret;
+// Algoritma/Fungsi: Menyelesaikan persamaan Diophantine linear ax + by = c dan mencari solusi integer yang meminimalkan |x| + |y|.
+// Kompleksitas Waktu: O(log(min(a, b))).
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+ll extgcd(ll a, ll b, ll &x, ll &y) {
+    if(b == 0) {
+        x = 1; y = 0;
+        return a;
+    }
+    ll x1, y1;
+    ll d = extgcd(b, a % b, x1, y1);
+    x = y1;
+    y = x1 - y1 * (a / b);
+    return d;
 }
-ll fix(ll sol, ll rt) {
-  ll ret = 0;
-  //CASE SOLUTION(X/Y) < TARGET
-  if(sol < target)
-    ret = -floor(abs(sol + target) / (double)rt);
-  //CASE SOLUTION(X/Y) > TARGET
-  if(sol > target)
-    ret = ceil(abs(sol - target) / (double)rt);
-  return ret;
+
+bool find_any_solution(ll a, ll b, ll c, ll &x0, ll &y0, ll &g) {
+    g = extgcd(abs(a), abs(b), x0, y0);
+    if(c % g != 0) return false;
+    x0 *= c / g;
+    y0 *= c / g;
+    if(a < 0) x0 = -x0;
+    if(b < 0) y0 = -y0;
+    return true;
 }
-ll work(ll a, ll b, ll c) {
-  ll gcd = extGcd(a, b);
-  ll solX = x * (c / gcd);
-  ll solY = y * (c / gcd);
-  a /= gcd;
-  b /= gcd;
-  ll fi = abs(fix(solX, b));
-  ll se = abs(fix(solY, a));
-  ll lo = min(fi, se);
-  ll hi = max(fi, se);
-  ll ans = abs(solX) + abs(solY);
-  for(ll i = lo; i <= hi; i++) {
-    ans = min(ans, abs(solX + i * b) + abs(solY - i * a));
-    ans = min(ans, abs(solX - i * b) + abs(solY + i * a));
-  }
-  return ans;
+
+ll min_abs_sum(ll a, ll b, ll c) {
+    ll x0, y0, g;
+    if(!find_any_solution(a, b, c, x0, y0, g)) return -1;
+    ll step_x = b / g, step_y = a / g;
+    ll k = -x0 / step_x;
+    ll ans = LLONG_MAX;
+    for(ll i = k - 2; i <= k + 2; ++i) {
+        ll cur_x = x0 + i * step_x;
+        ll cur_y = y0 - i * step_y;
+        ans = min(ans, abs(cur_x) + abs(cur_y));
+    }
+    return ans;
 }

@@ -1,7 +1,9 @@
-// O(VE log(max_flow)) if scaling == 1
-// O((V + E) sqrt(E)) if unit graph (turn scaling off)
-// O((V + E) sqrt(V)) if bipartite matching (turn scaling off)
-// indices are 0-based
+// Algoritma/Fungsi: Algoritma Dinic dengan teknik Capacity Scaling untuk mencari Maximum Network Flow pada graf berarah/tak berarah.
+// Kompleksitas Waktu: O(V * E * log(MaxFlow)) dengan scaling, O(E * sqrt(V)) pada bipartite matching.
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
 const ll INF = 1e18;
 
 struct Dinic {
@@ -56,8 +58,8 @@ struct Dinic {
     return 0;
   }
 
-  Dinic(int vertices, bool scaling = 1) : // toggle scaling here
-    n(vertices), lim(scaling ? 1 << 30 : 1), gr(n) {}
+  Dinic(int vertices, bool scaling = 1) :
+    n(vertices), lim(scaling ? (1LL << 60) : 1), gr(n) {}
 
   void add_edge(int from, int to, ll cap, bool directed = 1) {
     gr[from].push_back(e.size());
@@ -66,9 +68,9 @@ struct Dinic {
     e.emplace_back(from, directed ? 0 : cap);
   }
 
-  ll get_max_flow(int s, int t) { // call this
+  ll get_max_flow(int s, int t) {
     ll res = 0;
-    while(lim) {  // scaling
+    while(lim) {
       while(has_path(s, t)) {
         idx.assign(n, 0);
         while(ll add = get_flow(s, t, INF))

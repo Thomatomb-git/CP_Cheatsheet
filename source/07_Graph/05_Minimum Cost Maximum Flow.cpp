@@ -1,3 +1,9 @@
+// Algoritma/Fungsi: Minimum Cost Maximum Flow (MCMF) menggunakan Shortest Path Faster Algorithm (SPFA) untuk mencari alur maksimum berbiaya minimum.
+// Kompleksitas Waktu: O(F * V * E) dengan F adalah kapasitas alur maksimum.
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
 using FlowT = ll;
 using CostT = ll;
 
@@ -23,12 +29,16 @@ namespace MCMF {
     nxt[E] = lst[v], lst[v] = E++;
   }
   int spfa(int s, int t) {
-    fill_n(dst, n, C_INF), dst[s] = 0;
+    fill_n(dst, n, C_INF);
+    fill_n(vis, n, 0);
+    dst[s] = 0;
+    vis[s] = 1;
     queue<int> que;
     que.push(s);
     while(que.size()) {
       int u = que.front();
       que.pop();
+      vis[u] = 0;
       for(int e = lst[u]; e != -1; e = nxt[e])
         if(flw[e] < cap[e]) {
           int v = adj[e];
@@ -41,7 +51,6 @@ namespace MCMF {
             }
           }
         }
-      vis[u] = 0;
     }
     return dst[t] < C_INF;
   }

@@ -1,4 +1,10 @@
-using ld = double; // change to long double if reach 10^18
+// Algoritma/Fungsi: Fast Fourier Transform (FFT) bilangan kompleks untuk perkalian polinomial berpresisi tinggi.
+// Kompleksitas Waktu: O(N log N) dengan N ukuran derajat polinomial hasil pembulatan ke pangkat 2.
+#include <bits/stdc++.h>
+using namespace std;
+typedef long long ll;
+
+using ld = double;
 using cd = complex<ld>;
 const ld PI = acos(-(ld)1);
 
@@ -30,7 +36,7 @@ void fft(vector<cd>& a, int sign = 1) {
 vector<ll> multiply(vector<ll> const& a, vector<ll> const& b) {
   vector<cd> fa(a.begin(), a.end()), fb(b.begin(), b.end());
   int n = 1;
-  while(n < a.size() + b.size())
+  while(n < (int)(a.size() + b.size()))
     n <<= 1;
   fa.resize(n);
   fb.resize(n);
