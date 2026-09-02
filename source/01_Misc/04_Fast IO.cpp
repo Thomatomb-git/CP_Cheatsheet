@@ -1,5 +1,7 @@
 // Algoritma/Fungsi: Fast I/O membaca dan menulis integer dan string menggunakan low-level I/O tak terkunci (unlocked I/O).
 // Kompleksitas Waktu: O(jumlah digit) per operasi baca/tulis.
+// NOTE: read() hanya membaca integer. Pastikan input tidak mengandung EOF tak terduga.
+//       write(long long) menangani LLONG_MIN secara khusus (lihat kode).
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -12,7 +14,7 @@ int read() {
     char c;
     do {
         c = getchar_unlocked();
-    } while(c <= 32);
+    } while(c <= 32 && c != -1);
     int res = 0, mul = 1;
     if(c == '-') {
         mul = -1;
@@ -33,7 +35,9 @@ void write(long long x) {
     if(x < 0) {
         putchar_unlocked('-');
         if(x == LLONG_MIN) {
-            write((unsigned long long)LLONG_MAX + 1);
+            // Tangani khusus: -x dari LLONG_MIN overflow, tulis digit manual
+            const char* s = "9223372036854775808";
+            while(*s) putchar_unlocked(*s++);
             return;
         }
         x = -x;

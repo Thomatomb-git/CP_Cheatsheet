@@ -1,5 +1,7 @@
 // Algoritma/Fungsi: Algoritma Welzl teracak untuk mencari Minimum Enclosing Circle (MEC) dari himpunan titik 2D.
 // Kompleksitas Waktu: Expected O(N) dengan pengacakan titik (shuffle).
+// NOTE: WAJIB shuffle titik sebelum memanggil welzl: shuffle(p.begin(), p.end(), rng).
+//       Kasus 3 titik kolinear ditangani (fallback ke circle dari 2 titik terjauh).
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -26,6 +28,18 @@ Circle trivial(const vector<Point>& r) {
     double x0 = r[0].x, x1 = r[1].x, x2 = r[2].x;
     double y0 = r[0].y, y1 = r[1].y, y2 = r[2].y;
     double d = (x0 - x2) * (y1 - y2) - (x1 - x2) * (y0 - y2);
+    // Jika 3 titik kolinear (d ≈ 0), cari 2 titik terjauh lalu buat circle dari keduanya
+    if(fabs(d) < 1e-9) {
+      double d01 = hypot(x0-x1, y0-y1);
+      double d02 = hypot(x0-x2, y0-y2);
+      double d12 = hypot(x1-x2, y1-y2);
+      if(d01 >= d02 && d01 >= d12)
+        return Circle((x0+x1)/2, (y0+y1)/2, d01/2);
+      else if(d02 >= d12)
+        return Circle((x0+x2)/2, (y0+y2)/2, d02/2);
+      else
+        return Circle((x1+x2)/2, (y1+y2)/2, d12/2);
+    }
     double cx = (((x0 - x2) * (x0 + x2) + (y0 - y2) * (y0 + y2)) / 2 *
                  (y1 - y2) - ((x1 - x2) * (x1 + x2) + (y1 - y2) * (y1 + y2)) / 2
                  * (y0 - y2)) / d;

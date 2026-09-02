@@ -1,4 +1,6 @@
 % Algoritma/Fungsi: Sirkulasi Alur Jaringan dengan Batas Bawah dan Batas Atas Kapasitas (Flows with Demands) via Supersource/Supersink.
+% NOTE: S_1 = supersource baru, T_1 = supersink baru. T_0,S_0 = source/sink asli.
+%       Pastikan semua edge (S_1,v) dan (v,T_1) terisi penuh (flow == cap) agar feasible.
 \begin{lstlisting}
 let S0 be the source and T0 be the original sink
 1. add 2 additional nodes, call them S1 and T1
@@ -16,8 +18,8 @@ if step #9 fails, then it is not possible to satisfy the given demand
 \end{lstlisting}
 \par\noindent Mathematically, let $d(e)$ be the demand of edge $e$. Let $V$ be the set of every vertex in the graph.
 \begin{itemize}
-    \item $c'(S_1,v) = \sum_{u\in{V}} d(u,v)$ for each edge $(s',v)$.
-    \item $c'(v,T_1) = \sum_{v\in{V}} d(v,w)$ for each edge $(v,t')$.
+    \item $c'(S_1,v) = \sum_{u\in{V}} d(u,v)$ for each edge $(S_1,v)$.
+    \item $c'(v,T_1) = \sum_{w\in{V}} d(v,w)$ for each edge $(v,T_1)$.
     \item $c'(u,v) = c(u,v) - d(u,v)$ for each edge $(u,v)$ in the old network.
     \item $c'(T_0,S_0) = \infty$
 \end{itemize}

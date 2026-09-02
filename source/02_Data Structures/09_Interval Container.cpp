@@ -1,5 +1,7 @@
 // Algoritma/Fungsi: Interval Container menggunakan std::set untuk memelihara himpunan interval disjoint (penambahan dan pengurangan interval).
 // Kompleksitas Waktu: Amortized O(log N) per operasi penambahan/penghapusan interval.
+// NOTE: Interval disimpan sebagai pair {L, R} (half-open [L, R)).
+//       removeInterval meng-erase lalu re-insert, bukan cast-away constness (UB).
 #include <bits/stdc++.h>
 using namespace std;
 typedef pair<int, int> pii;
@@ -23,7 +25,8 @@ void removeInterval(set<pii> &is, int L, int R){
   if(L == R) return;
   auto it = addInterval(is, L, R);
   auto r2 = it->second;
-  if (it->first == L) is.erase(it);
-  else (int&)it->second = L;
+  int oldL = it->first;
+  is.erase(it);
+  if (oldL != L) is.emplace(oldL, L);
   if (R != r2) is.emplace(R, r2);
 }

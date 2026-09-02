@@ -1,5 +1,7 @@
 // Algoritma/Fungsi: Monotonic Sliding Window Queue untuk mencari nilai maksimum dalam antrian bergerak secara efisien.
 // Kompleksitas Waktu: Amortized O(1) per operasi add dan remove, O(1) untuk getMax().
+// NOTE: Pastikan queue tidak kosong sebelum memanggil getMax().
+//       Untuk MinQueue, ganti perbandingan < menjadi > pada fungsi add.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,6 +21,7 @@ struct MaxQueue{
     cntRem++;
   }
   int getMax(){
+    assert(!q.empty() && "getMax() called on empty MaxQueue");
     return q.front().first;
   }
 };

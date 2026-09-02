@@ -1,5 +1,7 @@
 // Algoritma/Fungsi: Generalized Chinese Remainder Theorem untuk menyelesaikan sistem kongruensi linear dengan modulo yang tidak harus prima relatif.
 // Kompleksitas Waktu: O(log(min(n, m))) per pasang persamaan.
+// NOTE: LCM dihitung sebagai (m/gcd)*n untuk menghindari overflow.
+//       Untuk banyak persamaan, panggil CRT secara berulang secara pair-wise.
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -34,7 +36,7 @@ pair<T, T> CRT(T a, T n, T b, T m) {
   } else if(abs(a - b) % gcd != 0)
     return pair<T, T>(-1, -1);
   else {
-    T lcm = m * n / gcd;
+    T lcm = (m / gcd) * n;
     T x = MOD(a + MOD(n * MOD(_n * ((b - a) / gcd), m / gcd), lcm), lcm);
     return pair<T, T>(x, lcm);
   }

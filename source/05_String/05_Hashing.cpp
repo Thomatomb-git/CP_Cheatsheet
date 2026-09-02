@@ -1,5 +1,8 @@
 // Algoritma/Fungsi: Double Polynomial Rolling Hash untuk menghitung dan membandingkan hash substring dalam O(1).
 // Kompleksitas Waktu: Prekomputasi O(N), Query getHash O(1).
+// NOTE: Base (key) bersifat static, di-generate sekali saja. Semua instance hashing berbagi
+//       base yang sama sehingga hash bisa dibandingkan antar string berbeda.
+//       Gunakan double hash (2 moduli) untuk mengurangi collision probability.
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
@@ -10,23 +13,34 @@ class hashing{
 public:
   int n;
   string s;
-  int mod[2] = {1000000007, 1000000009};
-  vector<ll> key[2];
+  static constexpr int mod[2] = {1000000007, 1000000009};
+  static vector<ll> key[2];
+  static bool key_initialized;
   vector<pair<ll,ll>> hsh;
+
+  static void init_keys(int sz) {
+    if(key_initialized && (int)key[0].size() >= sz + 1) return;
+    for(int i = 0; i < 2; i++){
+      key[i].resize(sz + 1);
+      if(!key_initialized) {
+        key[i][0] = 1;
+        do {
+          key[i][1] = 257 + (rng_hash() % (mod[i] - 300));
+        } while(key[i][1] <= 256);
+      }
+      int start = key_initialized ? (int)key[i].size() : 2;
+      key[i].resize(sz + 1);
+      for (int j = start; j <= sz; j++){
+        key[i][j] = 1LL * key[i][j-1] * key[i][1] % mod[i];
+      }
+    }
+    key_initialized = true;
+  }
 
   hashing(string _s) : s(_s){
     n = (int) s.size();
     if(n == 0) return;
-    for(int i = 0; i < 2; i++){
-      key[i].resize(n + 1);
-      key[i][0] = 1;
-      do {
-        key[i][1] = 257 + (rng_hash() % (mod[i] - 300));
-      } while(key[i][1] <= 256);
-      for (int j = 2; j <= n; j++){
-        key[i][j] = 1LL * key[i][j-1] * key[i][1] % mod[i];
-      }
-    }
+    init_keys(n);
     hsh.resize(n);
     hsh[0] = {s[0], s[0]};
     for (int i = 1; i < n; i++){
@@ -45,3 +59,5 @@ public:
     return R;
   }
 };
+vector<ll> hashing::key[2];
+bool hashing::key_initialized = false;

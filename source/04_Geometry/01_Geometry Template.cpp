@@ -232,6 +232,8 @@ bool insideCircle(point P, circle C) {
     return e_dist(P, C.P) <= C.r + EPS;
 }
 
+// NOTE: line menggunakan konvensi ax+by+c=0. Fungsi ini mensubstitusi ke persamaan lingkaran.
+//       Jika b==0, garis vertikal ditangani terpisah.
 bool lc_intersection(line L, circle O, point &P1, point &P2) {
     double a = L.a, b = L.b, c = L.c;
     double x = O.P.x, y = O.P.y, r = O.r;
@@ -243,9 +245,10 @@ bool lc_intersection(line L, circle O, point &P1, point &P2) {
         P2 = point(px, y + dy);
         return true;
     }
+    // Substitusi y = (-c - ax) / b ke (x-cx)^2 + (y-cy)^2 = r^2
     double A = a * a + b * b;
-    double B = 2 * a * b * y - 2 * a * c - 2 * b * b * x;
-    double C = b * b * x * x + b * b * y * y - 2 * b * c * y + c * c - b * b * r * r;
+    double B = 2 * a * c + 2 * a * b * y - 2 * b * b * x;
+    double C = b * b * x * x + c * c + 2 * b * c * y + b * b * y * y - b * b * r * r;
     double D = B * B - 4 * A * C;
     if(D < -EPS) return false;
     D = sqrt(max(0.0, D));
