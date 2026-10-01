@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Aho-Corasick Automaton untuk pencarian banyak pola string sekaligus (multi-pattern matching) dan suffix failure links.
-// Kompleksitas Waktu: Konstruksi O(total panjang pola * alfabet), Pencarian Teks O(|T| + matches).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Aho-Corasick Automaton untuk pencarian banyak pola string sekaligus (multi-pattern matching) dan suffix failure links.
+// Konstruksi O(total panjang pola * alfabet), Pencarian Teks O(|T| + matches).
 const int K = 26;
 struct Vertex {
   int next[K];

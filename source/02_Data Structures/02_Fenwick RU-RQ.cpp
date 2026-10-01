@@ -1,8 +1,6 @@
-// Algoritma/Fungsi: Fenwick Tree (BIT) 1-based index untuk range update dan range sum query.
-// Kompleksitas Waktu: Range Update O(log N), Range Query O(log N).
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+// 1-based index untuk range update dan range sum query.
+// Range Update O(log N), Range Query O(log N).
+using ll = long long;
 
 struct FenwickRURQ {
     int n;

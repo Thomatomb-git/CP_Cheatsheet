@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Z-Algorithm menghitung array Z di mana Z[i] adalah panjang prefix terpanjang dari S yang cocok dengan S[i...|S|-1].
-// Kompleksitas Waktu: O(N) linier.
-#include <bits/stdc++.h>
-using namespace std;
+// Z-Algorithm menghitung array Z di mana Z[i] adalah panjang prefix terpanjang dari S yang cocok dengan S[i...|S|-1].
+// O(N) linier.
 typedef vector<int> vi;
 
 vi Z(const string &S){

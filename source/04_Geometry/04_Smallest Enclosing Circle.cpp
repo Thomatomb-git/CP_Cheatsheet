@@ -1,10 +1,7 @@
-// Algoritma/Fungsi: Algoritma Welzl teracak untuk mencari Minimum Enclosing Circle (MEC) dari himpunan titik 2D.
-// Kompleksitas Waktu: Expected O(N) dengan pengacakan titik (shuffle).
+// Algoritma Welzl teracak untuk mencari Minimum Enclosing Circle dari himpunan titik 2D.
+// Expected O(N) dengan pengacakan titik (shuffle).
 // NOTE: WAJIB shuffle titik sebelum memanggil welzl: shuffle(p.begin(), p.end(), rng).
 //       Kasus 3 titik kolinear ditangani (fallback ke circle dari 2 titik terjauh).
-#include <bits/stdc++.h>
-using namespace std;
-
 struct Point {
   double x, y;
 };

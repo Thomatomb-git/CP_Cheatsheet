@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Extended Euclidean Algorithm untuk menghitung gcd(a, b) serta koefisien Bezout x, y (ax + by = gcd(a, b)).
-// Kompleksitas Waktu: O(log(min(a, b))).
-#include <bits/stdc++.h>
-using namespace std;
+// Extended Euclidean Algorithm untuk menghitung gcd(a, b) serta koefisien Bezout x, y (ax + by = gcd(a, b)).
+// O(log(min(a, b))).
 typedef long long ll;
 
 tuple<ll, ll, ll> gcd(ll a, ll b) {

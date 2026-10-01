@@ -1,9 +1,7 @@
-// Algoritma/Fungsi: Knuth-Yao DP Optimization untuk optimasi interval DP dengan kondisi quadrangle inequality (opt[i][j-1] <= opt[i][j] <= opt[i+1][j]).
-// Kompleksitas Waktu: O(N^2) (tereduksi dari naif O(N^3)).
+// Knuth-Yao DP Optimization untuk optimasi interval DP dengan kondisi quadrangle inequality (opt[i][j-1] <= opt[i][j] <= opt[i+1][j]).
+// O(N^2) (tereduksi dari naif O(N^3)).
 // NOTE: cost[i][j] harus memenuhi quadrangle inequality agar optimasi valid.
 //       Split point k harus memenuhi i < k < j (strict) agar tidak self-reference.
-#include <bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 
 const ll INF = 1e18;

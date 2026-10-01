@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Eliminasi Gauss-Jordan dengan full pivoting untuk menyelesaikan sistem persamaan linear AX = B, inversi matriks, dan determinan.
+// Eliminasi Gauss-Jordan dengan full pivoting untuk menyelesaikan sistem persamaan linear AX = B, inversi matriks, dan determinan.
 // Kompleksitas Waktu: O(N^3).
-#include <bits/stdc++.h>
-using namespace std;
-
 const double EPS = 1e-10;
 typedef vector<int> VI;
 typedef double T;

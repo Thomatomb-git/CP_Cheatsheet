@@ -1,9 +1,6 @@
-// Algoritma/Fungsi: Andrew's Monotone Chain untuk mencari Convex Hull 2D dan Winding Number untuk point-in-polygon test.
-// Kompleksitas Waktu: Convex Hull O(N log N), Point in Polygon O(N).
-#include <bits/stdc++.h>
-using namespace std;
-
-typedef double TD;
+// Andrew's Monotone Chain untuk mencari Convex Hull 2D dan Winding Number untuk point-in-polygon test.
+// Convex Hull O(N log N), Point in Polygon O(N).
+typedef long double TD;
 namespace GEOM {
     typedef pair<TD, TD> Pt;
     const TD EPS = 1e-9;

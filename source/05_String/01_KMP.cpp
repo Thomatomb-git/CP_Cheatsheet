@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Knuth-Morris-Pratt (KMP) untuk pencocokan string pola T di dalam teks S dan prekomputasi tabel LPS (pi).
-// Kompleksitas Waktu: Prekomputasi O(|T|), Pencarian O(|S| + |T|).
-#include <bits/stdc++.h>
-using namespace std;
-
+// KMP untuk pencocokan string pola T di dalam teks S dan prekomputasi tabel LPS (pi).
+// Prekomputasi O(|T|), Pencarian O(|S| + |T|).
 vector<int> compute_lps(const string& t) {
     int n = t.size();
     vector<int> pi(n, 0);

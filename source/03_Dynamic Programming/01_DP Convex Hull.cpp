@@ -1,9 +1,7 @@
-// Algoritma/Fungsi: Kondisi pengecekan gradien pada Convex Hull Trick (CHT) untuk eliminasi garis non-optimal pada optimasi DP.
-// Kompleksitas Waktu: Amortized O(1) per penambahan garis, keseluruhan DP O(N).
+// Kondisi pengecekan gradien pada Convex Hull Trick (CHT) untuk eliminasi garis non-optimal pada optimasi DP.
+// Amortized O(1) per penambahan garis, keseluruhan DP O(N).
 // NOTE: Menggunakan cross-multiplication (long long) agar tidak ada floating-point precision error.
 //       Pastikan slope (m[]) monoton naik/turun agar CHT bekerja dengan benar.
-#include <bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 
 const int N = 100005;

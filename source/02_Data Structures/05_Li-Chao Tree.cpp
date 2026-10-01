@@ -1,8 +1,6 @@
-// Algoritma/Fungsi: Dynamic Li-Chao Segment Tree untuk query nilai maksimum fungsi linear y = mx + c pada titik x.
-// Kompleksitas Waktu: Insert Garis O(log C), Query Titik O(log C) dengan C adalah rentang koordinat.
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+// Dynamic Li-Chao Segment Tree untuk query nilai maksimum fungsi linear y = mx + c pada titik x.
+// Insert Garis O(log C), Query Titik O(log C) dengan C adalah rentang koordinat.
+using ll = long long;
 
 struct Func {
   ll m, c;

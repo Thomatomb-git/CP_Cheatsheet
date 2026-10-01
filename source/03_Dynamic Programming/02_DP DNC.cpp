@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Divide and Conquer (D&C) DP Optimization untuk membagi N elemen ke dalam K partisi dengan fungsi biaya monoton.
-// Kompleksitas Waktu: O(K * N log N).
-#include <bits/stdc++.h>
-using namespace std;
+// Divide and Conquer (D&C) DP Optimization untuk membagi N elemen ke dalam K partisi dengan fungsi biaya monoton.
+// O(K * N log N).
 typedef long long ll;
 
 const ll INF = 1e18;

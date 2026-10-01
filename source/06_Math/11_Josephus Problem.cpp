@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Masalah eliminasi Josephus (0-indexed) untuk mencari posisi orang terakhir yang bertahan.
-// Kompleksitas Waktu: josephus_fast O(k log n), josephus_linear O(n).
-#include <bits/stdc++.h>
-using namespace std;
+// Masalah eliminasi Josephus (0-indexed) untuk mencari posisi orang terakhir yang bertahan.
+// josephus_fast O(k log n), josephus_linear O(n).
 typedef long long ll;
 
 ll josephus_fast(ll n, ll k) {

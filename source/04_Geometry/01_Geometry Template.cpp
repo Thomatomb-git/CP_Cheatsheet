@@ -1,8 +1,3 @@
-// Algoritma/Fungsi: Template komputasi geometri 2D lengkap (Point, Vector, Line, Segment, Circle, Triangle, Polygon).
-// Kompleksitas Waktu: Operasi primitif O(1), Ray Casting & Polygon Clipping O(N), Polygon Triangulation O(N^3).
-#include <bits/stdc++.h>
-using namespace std;
-
 #define For(i, a, b) for(int i = (a); i <= (b); ++i)
 #define rep(i, a, b) for(int i = (a); i <= (b); ++i)
 #define pb push_back

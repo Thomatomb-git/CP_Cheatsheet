@@ -1,8 +1,3 @@
-// Algoritma/Fungsi: Mengubah bilangan bulat positif menjadi representasi angka Romawi standar.
-// Kompleksitas Waktu: O(1) (terbatas oleh rentang representasi angka Romawi).
-#include <bits/stdc++.h>
-using namespace std;
-
 const string R[] = {
     "M", "CM", "D", "CD", "C", "XC", "L",
     "XL", "X", "IX", "V", "IV", "I"

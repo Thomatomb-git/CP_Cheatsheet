@@ -1,5 +1,5 @@
-// Algoritma/Fungsi: Persistent Segment Tree dengan node-copying untuk query range sum pada versi histori masa lalu.
-// Kompleksitas Waktu: Build O(N), Update O(log N), Query O(log N), Memori O(N + Q log N).
+// Persistent Segment Tree dengan node-copying untuk query range sum pada versi histori masa lalu.
+// Build O(N), Update O(log N), Query O(log N), Memori O(N + Q log N).
 #include <bits/stdc++.h>
 using namespace std;
 

@@ -1,9 +1,6 @@
-// Algoritma/Fungsi: Link-Cut Tree (LCT) berbasis Splay Tree untuk konektivitas dinamis graf pohon, query path, dan pemeliharaan subtree.
-// Kompleksitas Waktu: Amortized O(log N) per operasi link, cut, makeRoot, dan path query.
-#include <bits/stdc++.h>
-using namespace std;
+// Link-Cut Tree (LCT) berbasis Splay Tree untuk konektivitas dinamis graf pohon, query path, dan pemeliharaan subtree.
+// Amortized O(log N) per operasi link, cut, makeRoot, dan path query.
 typedef long long ll;
-
 const int maxV = 100005;
 
 typedef struct Node* Np;

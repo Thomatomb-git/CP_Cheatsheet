@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Implicit Treap (Cartesian Tree) untuk manipulasi sequence dengan operasi split by size, merge, insert, dan delete.
-// Kompleksitas Waktu: Split dan Merge O(log N) expected.
-#include <bits/stdc++.h>
-using namespace std;
-
+// Implicit Treap (Cartesian Tree) untuk manipulasi sequence dengan operasi split by size, merge, insert, dan delete.
+// Split dan Merge O(log N) expected.
 mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
 
 using Key = int;

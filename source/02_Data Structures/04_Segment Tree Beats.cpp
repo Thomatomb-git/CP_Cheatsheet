@@ -1,8 +1,6 @@
-// Algoritma/Fungsi: Segment Tree Beats untuk operasi range chmin (A_i = min(A_i, v)), range max query, dan range sum query.
-// Kompleksitas Waktu: Amortized O((N + Q) log N) untuk seluruh operasi.
-#include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
+// Segment Tree Beats untuk operasi range chmin (A_i = min(A_i, v)), range max query, dan range sum query.
+// Amortized O((N + Q) log N) untuk seluruh operasi.
+using ll = long long;
 
 const int N = 200005;
 const ll INF = 1e18;

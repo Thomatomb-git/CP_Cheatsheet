@@ -1,5 +1,5 @@
-// Algoritma/Fungsi: Fast Fourier Transform (FFT) bilangan kompleks untuk perkalian polinomial berpresisi tinggi.
-// Kompleksitas Waktu: O(N log N) dengan N ukuran derajat polinomial hasil pembulatan ke pangkat 2.
+// FFT bilangan kompleks untuk perkalian polinomial berpresisi tinggi.
+// O(N log N) dengan N ukuran derajat polinomial hasil pembulatan ke pangkat 2.
 using ll = long long;
 using ld = double;
 using cd = complex<ld>;

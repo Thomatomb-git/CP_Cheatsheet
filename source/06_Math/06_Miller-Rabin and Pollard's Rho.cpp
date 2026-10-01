@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Uji keprimaan Miller-Rabin deterministik (hingga 2^64) dan faktorisasi prima Pollard's Rho.
-// Kompleksitas Waktu: Miller-Rabin O(k log N) (k=12), Pollard's Rho O(N^(1/4) log N).
-#include <bits/stdc++.h>
-using namespace std;
+// Uji keprimaan Miller-Rabin deterministik (hingga 2^64) dan faktorisasi prima Pollard's Rho.
+// Miller-Rabin O(k log N) (k=12), Pollard's Rho O(N^(1/4) log N).
 typedef long long ll;
 typedef unsigned __int128 u128;
 

@@ -1,10 +1,7 @@
-// Algoritma/Fungsi: Generalized Chinese Remainder Theorem untuk menyelesaikan sistem kongruensi linear dengan modulo yang tidak harus prima relatif.
-// Kompleksitas Waktu: O(log(min(n, m))) per pasang persamaan.
+// Generalized CRT untuk menyelesaikan sistem kongruensi linear dengan modulo yang tidak harus prima relatif.
+// O(log(min(n, m))) per pasang persamaan.
 // NOTE: LCM dihitung sebagai (m/gcd)*n untuk menghindari overflow.
 //       Untuk banyak persamaan, panggil CRT secara berulang secara pair-wise.
-#include <bits/stdc++.h>
-using namespace std;
-
 template<typename T>
 T extended_euclid(T a, T b, T& x, T& y) {
   if(b == 0) {

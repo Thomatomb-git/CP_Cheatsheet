@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Algoritma Berlekamp-Massey untuk mencari relasi rekurensi linear terpendek dan suku ke-K barisan via eksponensiasi polinomial.
-// Kompleksitas Waktu: Berlekamp-Massey O(N^2), Perhitungan suku ke-K O(M^2 log K) dengan M panjang rekurensi.
-#include <bits/stdc++.h>
-using namespace std;
+// Algoritma Berlekamp-Massey untuk mencari relasi rekurensi linear terpendek dan suku ke-K barisan via eksponensiasi polinomial.
+// Berlekamp-Massey O(N^2), Perhitungan suku ke-K O(M^2 log K) dengan M panjang rekurensi.
 #define pb push_back
 typedef long long ll;
 #define SZ 233333

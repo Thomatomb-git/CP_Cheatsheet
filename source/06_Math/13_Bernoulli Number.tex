@@ -1,4 +1,8 @@
-% Algoritma/Fungsi: Definisi bilangan Bernoulli B_n dan Formula Faulhaber untuk menghitung jumlahan pangkat k^m.
-$\sum_{k = 1}^{n} k^m = \frac{1}{m + 1}\sum_{i = 0}^{m} \binom{m + 1}{i} B_i^+ n^{m + 1 - i}
-= m! \sum_{i = 0}^{m} \frac{B_i^+ n^{m + 1 - i}}{i! (m + 1 - i)!}
-\newline B_n^+ = 1 - \sum_{i = 0}^{n - 1}\binom{n}{i}\frac{B_i^+}{n - i + 1} ,\quad B_0^+ = 1$
+% Bentuk Standar Koefisien Binomial
+$$\sum_{k = 1}^{n} k^m = \frac{1}{m + 1} \sum_{i = 0}^{m} \binom{m + 1}{i} B_i^+ n^{m + 1 - i}$$
+
+% Bentuk Ekspansi Faktorial
+$$\sum_{k = 1}^{n} k^m = m! \sum_{i = 0}^{m} \frac{B_i^+ n^{m + 1 - i}}{i! (m + 1 - i)!}$$
+
+% Rekurensi Bilangan Bernoulli
+$$B_n^+ = 1 - \sum_{i = 0}^{n - 1} \binom{n}{i} \frac{B_i^+}{n - i + 1}, B_0^+ = 1$$

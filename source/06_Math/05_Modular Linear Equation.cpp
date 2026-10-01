@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Mencari semua solusi kongruensi linear ax = b (mod n).
-// Kompleksitas Waktu: O(log n + gcd(a, n)).
-#include <bits/stdc++.h>
-using namespace std;
+// Mencari semua solusi kongruensi linear ax = b (mod n).
+// O(log n + gcd(a, n)).
 typedef vector<int> vi;
 
 int ext_gcd(int a, int b, int &x, int &y) {

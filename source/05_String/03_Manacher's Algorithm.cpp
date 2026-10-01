@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Algoritma Manacher untuk mencari seluruh substring palindrom (panjang ganjil & genap) dan mengecek isPalindrome dalam O(1).
-// Kompleksitas Waktu: Prekomputasi O(N), Query isPalindrome O(1).
-#include <bits/stdc++.h>
-using namespace std;
+// Algoritma Manacher untuk mencari seluruh substring palindrom (panjang ganjil & genap) dan mengecek isPalindrome dalam O(1).
+// Prekomputasi O(N), Query isPalindrome O(1).
 #define rep(i, a, b) for(int i = (a); i <= (b); ++i)
 
 const int MAX = 1000005;

@@ -1,10 +1,8 @@
-// Algoritma/Fungsi: Double Polynomial Rolling Hash untuk menghitung dan membandingkan hash substring dalam O(1).
-// Kompleksitas Waktu: Prekomputasi O(N), Query getHash O(1).
+// Double Polynomial Rolling Hash untuk menghitung dan membandingkan hash substring dalam O(1).
+// Prekomputasi O(N), Query getHash O(1).
 // NOTE: Base (key) bersifat static, di-generate sekali saja. Semua instance hashing berbagi
 //       base yang sama sehingga hash bisa dibandingkan antar string berbeda.
 //       Gunakan double hash (2 moduli) untuk mengurangi collision probability.
-#include <bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 
 mt19937 rng_hash(chrono::steady_clock::now().time_since_epoch().count());

@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Number Theoretic Transform (NTT) untuk perkalian polinomial eksak modulo prima 64-bit yang mendukung NTT.
-// Kompleksitas Waktu: O(N log N).
-#include <bits/stdc++.h>
-using namespace std;
-
+// NTT untuk perkalian polinomial eksak modulo prima 64-bit yang mendukung NTT.
+// O(N log N).
 namespace FFT {
   const int LN = 23;
   const int N = 1 << LN;

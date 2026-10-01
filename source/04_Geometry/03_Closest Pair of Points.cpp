@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Divide and Conquer untuk mencari pasangan dua titik 2D dengan jarak Euclidean terdekat.
-// Kompleksitas Waktu: O(N log N) atau O(N log^2 N).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Divide and Conquer untuk mencari pasangan dua titik 2D dengan jarak Euclidean terdekat.
+// O(N log N) atau O(N log^2 N).
 #define fi first
 #define se second
 typedef pair<int, int> pii;

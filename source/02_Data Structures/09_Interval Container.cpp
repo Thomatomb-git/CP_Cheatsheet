@@ -1,9 +1,7 @@
-// Algoritma/Fungsi: Interval Container menggunakan std::set untuk memelihara himpunan interval disjoint (penambahan dan pengurangan interval).
-// Kompleksitas Waktu: Amortized O(log N) per operasi penambahan/penghapusan interval.
-// NOTE: Interval disimpan sebagai pair {L, R} (half-open [L, R)).
+// Interval Container menggunakan set untuk memelihara himpunan interval disjoint (penambahan dan pengurangan interval).
+// Amortized O(log N) per operasi penambahan/penghapusan interval.
+// NOTE: Interval disimpan sebagai pair [L, R).
 //       removeInterval meng-erase lalu re-insert, bukan cast-away constness (UB).
-#include <bits/stdc++.h>
-using namespace std;
 typedef pair<int, int> pii;
 
 set<pii>::iterator addInterval(set<pii> &is, int L, int R){

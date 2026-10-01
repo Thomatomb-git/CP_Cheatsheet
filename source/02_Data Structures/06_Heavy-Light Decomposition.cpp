@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Heavy-Light Decomposition (HLD) pada Tree 1-based index untuk path update, path query, dan subtree update/query.
-// Kompleksitas Waktu: Path Query/Update O(log^2 N), Subtree Query/Update O(log N).
-#include <bits/stdc++.h>
-using namespace std;
-
+// HLD pada Tree 1-based index untuk path update, path query, dan subtree update/query.
+// Path Query/Update O(log^2 N), Subtree Query/Update O(log N).
 struct Segtree {
     int n;
     vector<int> t;

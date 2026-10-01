@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Generalized Lucas Theorem untuk menghitung kombinasi C(n, r) modulo prime power (p^k).
-// Kompleksitas Waktu: O(p^k + log_p n).
-#include <bits/stdc++.h>
-using namespace std;
+// Generalized Lucas Theorem untuk menghitung kombinasi C(n, r) modulo prime power (p^k).
+// O(p^k + log_p n).
 typedef long long ll;
 
 ll fast(ll a, ll b, ll mod) {

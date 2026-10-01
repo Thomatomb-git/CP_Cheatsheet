@@ -1,9 +1,7 @@
-// Algoritma/Fungsi: Menyelesaikan persamaan Diophantine linear ax + by = c dan mencari solusi integer yang meminimalkan |x| + |y|.
-// Kompleksitas Waktu: O(log(min(a, b))).
+// Menyelesaikan persamaan Diophantine linear ax + by = c dan mencari solusi integer yang meminimalkan |x| + |y|.
+// O(log(min(a, b))).
 // NOTE: Menangani edge case b=0 (atau a=0) secara terpisah.
 //       Jika c % gcd(a,b) != 0, tidak ada solusi (return -1).
-#include <bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 
 ll extgcd(ll a, ll b, ll &x, ll &y) {

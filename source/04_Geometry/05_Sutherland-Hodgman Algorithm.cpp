@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Sutherland-Hodgman Polygon Clipping untuk memotong poligon terhadap poligon konveks/half-plane.
-// Kompleksitas Waktu: O(N * M) dengan N titik poligon dan M titik pemotong.
-#include <bits/stdc++.h>
-using namespace std;
-
+// Sutherland-Hodgman Polygon Clipping untuk memotong poligon terhadap poligon konveks/half-plane.
+// O(N * M) dengan N titik poligon dan M titik pemotong.
 const double EPS = 1e-9;
 
 struct point {
