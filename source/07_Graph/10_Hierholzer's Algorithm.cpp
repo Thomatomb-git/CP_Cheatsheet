@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Algoritma Hierholzer untuk mencari lintasan atau siklus Eulerian pada graf berarah.
-// Kompleksitas Waktu: O(V + E).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Algoritma Hierholzer untuk mencari lintasan atau siklus Eulerian pada graf berarah.
+// O(V + E).
 vector<int> hierholzer(int start_node, vector<vector<int>>& adj) {
     stack<int> path;
     vector<int> euler;

@@ -1,0 +1,13 @@
+Bentuk Umum (Arbitrary Points):
+$$P(x) = \sum_{i = 0}^{k} y_i \prod_{j \neq i} \frac{x - x_j}{x_i - x_j}$$
+
+Polinomial Basis Lagrange:
+$$L_i(x) = \prod_{\substack{0 \le j \le k \\ j \neq i}} \frac{x - x_j}{x_i - x_j}$$
+
+Titik Berjarak Seragam $x_i = i$ :
+$$P(x) = \sum_{i = 0}^{k} y_i \cdot \frac{\prod_{j=0}^{k} (x - j)}{(x - i)} \cdot \frac{(-1)^{k - i}}{i! \, (k - i)!}$$
+
+Prefix-Suffix Decomposition:
+$$\text{pref}_i = \prod_{j = 0}^{i} (x - j), \quad \text{suff}_i = \prod_{j = i}^{k} (x - j)$$
+
+$$P(x) = \sum_{i = 0}^{k} y_i \cdot \frac{\text{pref}_{i - 1} \cdot \text{suff}_{i + 1}}{i! \, (k - i)!} \cdot (-1)^{k - i}$$

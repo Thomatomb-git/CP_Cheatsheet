@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Algoritma Tarjan DFS untuk mencari Titik Artikulasi (Cut Vertices) dan Jembatan (Bridges) pada graf tak berarah/multigraf.
-// Kompleksitas Waktu: O(V + E).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Algoritma Tarjan DFS untuk mencari Titik Artikulasi (Cut Vertices) dan Jembatan (Bridges) pada graf tak berarah/multigraf.
+// O(V + E).
 struct GraphBridges {
     int n, timer;
     vector<vector<pair<int, int>>> gr;

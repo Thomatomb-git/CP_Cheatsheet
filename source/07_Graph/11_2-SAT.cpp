@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: 2-SAT Solver menggunakan algoritma Kosaraju untuk mencari Strongly Connected Components pada graf implikasi boolean.
-// Kompleksitas Waktu: O(V + E) dengan V jumlah variabel dan E jumlah klausul.
-#include <bits/stdc++.h>
-using namespace std;
-
+// 2-SAT Solver menggunakan algoritma Kosaraju untuk mencari SSC pada graf implikasi boolean.
+// O(V + E) dengan V jumlah variabel dan E jumlah klausul.
 struct TwoSAT {
   int n;
   vector<vector<int>> g, gr;

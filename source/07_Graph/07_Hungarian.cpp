@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Algoritma Hungarian (Kuhn-Munkres) untuk Maximum Weight Bipartite Matching pada graf bipartit berbobot.
-// Kompleksitas Waktu: O(N^3).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Algoritma Hungarian (Kuhn-Munkres) untuk Maximum Weight Bipartite Matching pada graf bipartit berbobot.
+// O(N^3).
 template <typename TD> struct Hungarian {
     TD INF = 1e9;
     int n;

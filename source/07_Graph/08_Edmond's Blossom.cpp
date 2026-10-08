@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Algoritma Edmond's Blossom untuk mencari Maximum Cardinality Matching pada graf umum (non-bipartit) 1-based index.
-// Kompleksitas Waktu: O(V^2 * E).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Algoritma Edmond's Blossom untuk mencari Maximum Cardinality Matching pada graf umum (non-bipartit) 1-based index.
+// O(V^2 * E).
 struct Blossom {
   vector<int> vis, dad, orig, match, aux;
   vector<vector<int>> conn;

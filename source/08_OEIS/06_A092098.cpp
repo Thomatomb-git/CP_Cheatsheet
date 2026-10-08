@@ -1,7 +1,5 @@
 // Algoritma/Fungsi: 3-Portolan Numbers untuk menghitung jumlah daerah yang terbentuk dari n-seksi sudut pada segitiga sama sisi.
 // Kompleksitas Waktu: O(N^2).
-#include <bits/stdc++.h>
-using namespace std;
 typedef long long ll;
 
 ll solve(ll n){

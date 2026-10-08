@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Pewarnaan sisi greedy (Edge Coloring) pada pohon/hutan sehingga sisi yang bertetangga memiliki warna berbeda.
-// Kompleksitas Waktu: O(V + E).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Pewarnaan sisi greedy (Edge Coloring) pada pohon/hutan sehingga sisi yang bertetangga memiliki warna berbeda.
+// O(V + E).
 void colorEdges(int ptr, vector<vector<pair<int, int>>>& gra, vector<int>& edgeColors, vector<bool>& isVisited) {
   queue<int> q;
   int c = 0;

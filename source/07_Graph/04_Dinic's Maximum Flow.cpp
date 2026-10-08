@@ -1,7 +1,5 @@
-// Algoritma/Fungsi: Algoritma Dinic dengan teknik Capacity Scaling untuk mencari Maximum Network Flow pada graf berarah/tak berarah.
-// Kompleksitas Waktu: O(V * E * log(MaxFlow)) dengan scaling, O(E * sqrt(V)) pada bipartite matching.
-#include <bits/stdc++.h>
-using namespace std;
+// Algoritma Dinic dengan teknik Capacity Scaling untuk mencari Maximum Network Flow pada graf berarah/tak berarah.
+// O(V * E * log(MaxFlow)) dengan scaling, O(E * sqrt(V)) pada bipartite matching.
 typedef long long ll;
 
 const ll INF = 1e18;

@@ -1,0 +1,17 @@
+Grid Path Dasar
+$$\text{Paths}\big((0, 0) \to (n, m)\big) = \binom{n + m}{n}$$
+
+André's Reflection Principle \newline
+Mencari lintasan dari $A(x_1, y_1)$ ke $B(x_2, y_2)$ tanpa menyentuh garis $y = x + k$. \newline
+Titik refleksi $A$ terhadap $y = x +k$ adalah $A'$:
+$$A' = (y_1 - k, \, x_1 + k)$$
+$$\text{Valid Paths} = \text{Paths}(A \to B) - \text{Paths}(A' \to B)$$
+
+Catalan / Dyck Path $(y <= x)$
+$$\text{Dyck Paths}(n) = \binom{2n}{n} - \binom{2n}{n + 1} = \frac{1}{n + 1}\binom{2n}{n}$$
+
+General Grid $(0, 0) -> (n, m)$ dengan $y <= x$ dan $n >= m$
+$$\text{Valid Paths} = \binom{n + m}{m} - \binom{n + m}{m - 1} = \frac{n - m + 1}{n + 1}\binom{n + m}{m}$$
+
+Bertrand's Ballot Theorem
+$$\mathbb{P}(P > Q \text{ throughout}) = \frac{p - q}{p + q} \quad (p > q)$$

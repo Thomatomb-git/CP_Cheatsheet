@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Centroid Decomposition pada Tree untuk teknik divide and conquer jalur/lintasan pada pohon.
-// Kompleksitas Waktu: Pembentukan dekomposisi O(N log N), kedalaman pohon centroid O(log N).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Centroid Decomposition pada Tree untuk teknik divide and conquer jalur/lintasan pada pohon.
+// Pembentukan dekomposisi O(N log N), kedalaman pohon centroid O(log N).
 const int N = 200005;
 vector<int> adj[N];
 int sz[N], par_cen[N];

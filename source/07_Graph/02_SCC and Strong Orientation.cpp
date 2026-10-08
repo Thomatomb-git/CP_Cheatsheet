@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Algoritma Tarjan untuk mencari Komponen Terhubung Kuat (Strongly Connected Components / SCC) pada graf berarah.
-// Kompleksitas Waktu: O(V + E).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Algoritma Tarjan untuk mencari SCC pada directed graph.
+// O(V + E).
 const int N = 200005;
 vector<int> v[N];
 bool vis[N], ins[N];

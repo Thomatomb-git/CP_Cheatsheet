@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Menemukan panjang lintasan terpendek ke-k dari simpul s ke t pada graf berbobot positif menggunakan Priority Queue (Dijkstra-based).
-// Kompleksitas Waktu: O(K * E log(K * V)).
-#include <bits/stdc++.h>
-using namespace std;
-
+// Menemukan panjang lintasan terpendek ke-k dari simpul s ke t pada graf berbobot positif menggunakan Priority Queue (Dijkstra-based).
+// O(K * E log(K * V)).
 const int MAXN = 1005;
 vector<pair<int, int>> g[MAXN];
 int vis_cnt[MAXN];

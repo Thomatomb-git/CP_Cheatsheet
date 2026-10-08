@@ -1,8 +1,5 @@
-// Algoritma/Fungsi: Mencari lintasan/siklus Eulerian pada graf tak berarah sederhana dengan mengunjungi setiap sisi tepat satu kali.
-// Kompleksitas Waktu: O(E log V) menggunakan std::set.
-#include <bits/stdc++.h>
-using namespace std;
-
+// Mencari lintasan/siklus Eulerian pada graf tak berarah sederhana dengan mengunjungi setiap sisi tepat satu kali.
+// O(E log V) menggunakan set.
 vector<set<int>> g;
 vector<int> ans;
 
