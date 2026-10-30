@@ -33,12 +33,10 @@ ll mod_inv(ll a, ll m) {
     return (x % m + m) % m;
 }
 
-// ============================================================================
 // KASUS 2: Discrete Logarithm (a^x = b mod m)
 // Mendukung m sembarang (Extended BSGS)
 // Mengembalikan nilai x non-negatif terkecil, atau -1 jika tidak ada solusi.
 // Kompleksitas: O(sqrt(m))
-// ============================================================================
 ll solve_discrete_log(ll a, ll b, ll m) {
     a %= m; b %= m;
     if (m == 1) return 0;
@@ -100,11 +98,9 @@ ll solve_discrete_log(ll a, ll b, ll m) {
     return -1;
 }
 
-// ============================================================================
 // KASUS 1: Discrete Root (x^a = b mod p) dengan p bilangan prima
 // Mengembalikan semua solusi x mod p dalam vector terurut
 // Kompleksitas: O(sqrt(p) log p)
-// ============================================================================
 
 // Mencari generator / Primitive Root modulo p prima
 ll find_primitive_root(ll p) {

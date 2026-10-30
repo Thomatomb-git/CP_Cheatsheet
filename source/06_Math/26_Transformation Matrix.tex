@@ -1,0 +1,78 @@
+\begin{itemize}
+    \item Reflection point $(x, y)$ to line $ax+by+c = 0$
+    \[
+        M = \frac{1}{a^2 + b^2}
+        \begin{bmatrix}
+            b^2 - a^2 & -2ab & -2ac \\
+            -2ab & a^2 - b^2 & -2bc \\
+            0 & 0 & a^2 + b^2
+        \end{bmatrix}
+    \]
+
+    \item Translation sejauh $(t_{x}, t_{y})$
+    \[
+        M = 
+        \begin{bmatrix}
+            1 & 0 & t_x \\
+            0 & 1 & t_y \\
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+
+    \item Rotation (CCW) pada titik $(p_x, p_y)$ sebesar $\theta$
+    \[
+        M = 
+        \begin{bmatrix}
+            \cos\theta & -\sin\theta & p_x(1 - \cos\theta) + p_y\sin\theta \\
+            \sin\theta & \cos\theta & p_y(1 - \cos\theta) - p_x\sin\theta \\
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+
+    \item Dilatasi sebesar $(s_x, s_y)$ pada titik $(p_x, p_y)$
+    \[
+        M = 
+        \begin{bmatrix}
+            s_x & 0 & p_x(1 - s_x) \\
+            0 & s_y & p_y(1 - s_y) \\
+            0 & 0 & 1
+        \end{bmatrix}
+    \]
+
+    \item Shear sebesar $(k_x, k_y)$
+    \[
+        M = 
+        \begin{bmatrix}
+            1 & k_x & 0 \\
+            k_y & 1 & 0 \\
+            0 & 0 & 1
+        \end{bmatrix}
+        \implies
+        \begin{cases}
+            x' = x + k_x y \\
+            y' = y + k_y x
+        \end{cases}
+    \]
+
+    \item Orthogonal projection point $(x, y)$ to line $ax+by+c = 0$
+    \[
+        M = \frac{1}{a^2 + b^2}
+        \begin{bmatrix}
+            b^2 & -ab & -ac \\
+            -ab & a^2 & -bc \\
+            0 & 0 & a^2 + b^2
+        \end{bmatrix}
+    \]
+
+    \item Inverse transformation
+    \[
+        \begin{cases}
+            T(t_x, t_y)^{-1} = T(-t_x, -t_y) \\
+            R_{(p_x, p_y)}(\theta)^{-1} = R_{(p_x, p_y)}(-\theta) \\
+            S_{(p_x, p_y)}(s_x, s_y)^{-1} = S_{(p_x, p_y)}\left(\frac{1}{s_x}, \frac{1}{s_y}\right) \\
+            M_{\text{ref}}^{-1} = M_{\text{ref}} \quad (\text{since } M_{\text{ref}}^2 = I)
+        \end{cases}
+    \]
+
+    \item Area $\implies A' = A \times |det(M)|$
+\end{itemize}

@@ -1,65 +1,101 @@
-struct WaveletTree {
-    int lo, hi;
-    WaveletTree *left = nullptr, *right = nullptr;
-    vector<int> pref;
+struct Wavelet{
+    
+    struct Node{
+        vector<ll> arr;
+        vector<ll> pref;
+        Node* left = NULL;
+        Node* right = NULL;
 
-    // Build tree dari iterator [from, to) dengan domain nilai [lo, hi]
-    WaveletTree(auto from, auto to, int lo, int hi) : lo(lo), hi(hi) {
-        if (lo == hi || from >= to) return;
-        int mid = lo + (hi - lo) / 2;
-        
-        pref.reserve(distance(from, to) + 1);
-        pref.push_back(0);
-        for (auto it = from; it != to; ++it) {
-            pref.push_back(pref.back() + (*it <= mid));
+        Node(){}
+    };
+
+    vector<Node*> tree;
+    const ll maxA = 1e9;
+
+    Wavelet(vector<ll>& a)
+    {
+        tree.push_back(new Node());
+        tree[0]->arr = a;
+    }
+
+    Node* newNode()
+    {
+        tree.push_back(new Node());
+        return tree.back();
+    }
+
+    void buildTemplate(Node* currNode, ll leftNode, ll rightNode)
+    {
+        if(leftNode == rightNode) return;
+        ll mid = (leftNode + rightNode) / 2;
+        currNode->pref.resize(currNode->arr.size());
+          
+        bool sendLeft = false;
+        bool sendRight = false;
+        ll currSum = 0;
+        for(int i = 0; i < currNode->arr.size(); ++i)
+        {
+            if(currNode->arr[i] > mid)
+            {
+                currSum++;
+                sendRight = true;
+            }else{
+                sendLeft = true;
+            }
+
+            currNode->pref[i] = currSum;
         }
 
-        auto pivot = stable_partition(from, to, [mid](int x) { 
-            return x <= mid; 
-        });
-
-        left = new WaveletTree(from, pivot, lo, mid);
-        right = new WaveletTree(pivot, to, mid + 1, hi);
-    }
-
-    // 1. K-th Smallest di range [l, r] (1-indexed) -> O(log Sigma)
-    int kth(int l, int r, int k) {
-        if (lo == hi) return lo;
-        int in_left = pref[r] - pref[l - 1];
-        if (k <= in_left) {
-            return left->kth(pref[l - 1] + 1, pref[r], k);
-        } else {
-            return right->kth(l - pref[l - 1], r - pref[r], k - in_left);
+        Node* left = (sendLeft) ? newNode() : NULL;
+        Node* right = (sendRight) ? newNode() : NULL;
+        currNode->left = left;
+        currNode->right = right;
+        for(int i = 0; i < currNode->arr.size(); ++i)
+        {
+            if(currNode->arr[i] <= mid) left->arr.push_back(currNode->arr[i]); 
+            else right->arr.push_back(currNode->arr[i]);
         }
+
+        if(sendLeft) buildTemplate(currNode->left, leftNode, mid);
+        if(sendRight) buildTemplate(currNode->right, mid + 1, rightNode);
     }
 
-    // 2. Menghitung banyaknya elemen <= x di range [l, r] -> O(log Sigma)
-    int count_lte(int l, int r, int x) {
-        if (l > r || x < lo) return 0;
-        if (hi <= x) return r - l + 1;
-        int mid = lo + (hi - lo) / 2;
-        int in_left = pref[r] - pref[l - 1];
-        if (x <= mid) {
-            return left ? left->count_lte(pref[l - 1] + 1, pref[r], x) : 0;
-        } else {
-            return in_left + (right ? right->count_lte(l - pref[l - 1], r - pref[r], x) : 0);
+    ll numberOfOccurenceTemplate(Node* currNode, ll leftNode, ll rightNode, ll endPoint, ll leftVal, ll rightVal)
+    {
+        if(leftVal > rightNode || rightVal < leftNode || endPoint == -1 || currNode == NULL) return 0;
+        if(leftVal <= leftNode && rightNode <= rightVal)
+        {
+            return endPoint + 1;
         }
+
+        ll mid = (leftNode + rightNode) / 2;
+        ll countRight = currNode->pref[endPoint];
+        ll countLeft = endPoint - countRight;
+
+        return numberOfOccurenceTemplate(currNode->left, leftNode, mid, countLeft, leftVal, rightVal) + 
+                numberOfOccurenceTemplate(currNode->right, mid + 1, rightNode, countRight - 1, leftVal, rightVal);
     }
 
-    // 3. Menghitung frekuensi kemunculan nilai x di range [l, r] -> O(log Sigma)
-    int count_freq(int l, int r, int x) {
-        if (l > r || x < lo || x > hi) return 0;
-        if (lo == hi) return r - l + 1;
-        int mid = lo + (hi - lo) / 2;
-        if (x <= mid) {
-            return left ? left->count_freq(pref[l - 1] + 1, pref[r], x) : 0;
-        } else {
-            return right ? right->count_freq(l - pref[l - 1], r - pref[r], x) : 0;
+    ll kthSmallestElement(Node* currNode, ll leftNode, ll rightNode, ll l, ll r, ll k)
+    {
+        if(leftNode == rightNode) return leftNode;
+        ll mid = (leftNode + rightNode) / 2;
+        ll countRightL = (l == 0) ? 0 : currNode->pref[l - 1];
+        ll countRightR = currNode->pref[r];
+        ll countLeft = (r - l + 1) - (countRightR - countRightL);
+        if(k <= countLeft)
+        {
+            return kthSmallestElement(currNode->left, leftNode, mid, l - countRightL, r - countRightR, k);
         }
+        return kthSmallestElement(currNode->right, mid + 1, rightNode, countRightL, countRightR - 1, k - countLeft);
     }
 
-    ~WaveletTree() {
-        delete left;
-        delete right;
+
+    void build() {buildTemplate(tree[0], 0, maxA);}
+    ll numberOfOccurence(ll l, ll r, ll lowBound, ll upBound)
+    {
+        return numberOfOccurenceTemplate(tree[0], 0, maxA, r, lowBound, upBound) -
+                numberOfOccurenceTemplate(tree[0], 0, maxA, l - 1, lowBound, upBound);
     }
+    ll kthSmallestElement(ll l, ll r, ll k) {return kthSmallestElement(tree[0], 0, maxA, l, r, k);}
 };
