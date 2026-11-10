@@ -1,18 +1,25 @@
-template<ll SZ = 2>
-struct Mat {
-    ll a[SZ][SZ] = {};
-    static Mat id() { Mat r; for (ll i = 0; i < SZ; ++i) r.a[i][i] = 1; return r; }
-    Mat operator*(const Mat& o) const {
-        Mat r;
-        for (ll i = 0; i < SZ; ++i)
-            for (ll k = 0; k < SZ; ++k) if (a[i][k])
-                for (ll j = 0; j < SZ; ++j)
-                    r.a[i][j] = (r.a[i][j] + (__int128)a[i][k] * o.a[k][j]) % MOD;
-        return r;
+using vvll = vector<vector<ll>>;
+vvll matmul (vvll &a, vvll &b){
+  vvll res (a.size(), vector<ll>(b[0].size(), 0));
+  for (ll i = 0; i < a.size(); i++){
+    for (ll j = 0; j < b[0].size(); j++){
+      for (ll k = 0; k < a[0].size(); k++){
+        res[i][j] += a[i][k] * b[k][j];
+      }
     }
-    Mat pow(ll p) const {
-        Mat r = id(), b = *this;
-        for (; p; p >>= 1, b = b * b) if (p & 1) r = r * b;
-        return r;
-    }
-};
+  }
+  return res;
+}
+
+// only can for N x N
+vvll matexpo (vvll a, ll b){
+  vvll res (a.size(), vector<ll> (a[0].size(), 0));
+  for (ll i = 0; i < a.size(); i++) res[i][i] = 1;
+
+  while (b > 0){
+    if (b & 1) res = matmul(res, a);
+    a = matmul(a, a);
+    b /= 2;
+  }
+  return res;
+}

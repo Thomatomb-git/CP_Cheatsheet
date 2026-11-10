@@ -1,0 +1,31 @@
+\subsubsection*{Stirling Numbers of the First Kind (Unsigned) --- $c(n, k)$ or $\genfrac{[}{]}{0pt}{}{n}{k}$}
+\textit{Number of permutations of $n$ elements with $k$ disjoint cycles. (Signed version: $s(n, k) = (-1)^{n - k} \genfrac{[}{]}{0pt}{}{n}{k}$)}
+\begin{itemize}
+    \item \textbf{Recurrence:} $\genfrac{[}{]}{0pt}{}{n}{k} = \genfrac{[}{]}{0pt}{}{n - 1}{k - 1} + (n - 1) \genfrac{[}{]}{0pt}{}{n - 1}{k}$
+    \item \textbf{Base Cases:} $\genfrac{[}{]}{0pt}{}{0}{0} = 1$, $\genfrac{[}{]}{0pt}{}{n}{0} = 0 \ (n \ge 1)$, $\genfrac{[}{]}{0pt}{}{n}{n} = 1$
+    \item \textbf{Special Values:} $\genfrac{[}{]}{0pt}{}{n}{1} = (n - 1)!$, \quad $\genfrac{[}{]}{0pt}{}{n}{n - 1} = \binom{n}{2}$, \quad $\sum_{k = 0}^{n} \genfrac{[}{]}{0pt}{}{n}{k} = n!$
+    \item \textbf{Rising Factorial (Row GF):} $x^{\overline{n}} = x(x + 1)\cdots(x + n - 1) = \sum_{k = 0}^{n} \genfrac{[}{]}{0pt}{}{n}{k} x^k$ \quad \textit{(Compute row in $O(n \log^2 n)$ or $O(n \log n)$ via D\&C / Taylor shift)}
+    \item \textbf{Falling Factorial:} $x^{\underline{n}} = x(x - 1)\cdots(x - n + 1) = \sum_{k = 0}^{n} (-1)^{n - k} \genfrac{[}{]}{0pt}{}{n}{k} x^k$
+    \item \textbf{Column EGF (Fixed $k$):} $\sum_{n = k}^{\infty} \genfrac{[}{]}{0pt}{}{n}{k} \dfrac{x^n}{n!} = \dfrac{1}{k!} \left( \ln \dfrac{1}{1 - x} \right)^k$
+\end{itemize}
+
+\subsubsection*{Stirling Numbers of the Second Kind --- $S(n, k)$ or $\genfrac{\{}{\}}{0pt}{}{n}{k}$}
+\textit{Number of ways to partition a set of $n$ labeled elements into $k$ non-empty unlabeled subsets.}
+\begin{itemize}
+    \item \textbf{Recurrence:} $\genfrac{\{}{\}}{0pt}{}{n}{k} = \genfrac{\{}{\}}{0pt}{}{n - 1}{k - 1} + k \genfrac{\{}{\}}{0pt}{}{n - 1}{k}$
+    \item \textbf{Base Cases:} $\genfrac{\{}{\}}{0pt}{}{0}{0} = 1$, $\genfrac{\{}{\}}{0pt}{}{n}{0} = 0 \ (n \ge 1)$, $\genfrac{\{}{\}}{0pt}{}{n}{1} = \genfrac{\{}{\}}{0pt}{}{n}{n} = 1$
+    \item \textbf{Special Values:} $\genfrac{\{}{\}}{0pt}{}{n}{2} = 2^{n - 1} - 1$, \quad $\genfrac{\{}{\}}{0pt}{}{n}{n - 1} = \binom{n}{2}$
+    \item \textbf{Explicit Formula (Row Convolution):} 
+    $$\genfrac{\{}{\}}{0pt}{}{n}{k} = \dfrac{1}{k!} \sum_{j = 0}^{k} (-1)^{k - j} \binom{k}{j} j^n = \sum_{j = 0}^{k} \dfrac{(-1)^{k - j}}{(k - j)!} \cdot \dfrac{j^n}{j!}$$
+    \textit{(Compute a single row $\genfrac{\{}{\}}{0pt}{}{n}{0 \dots n}$ in $O(n \log n)$ using NTT)}
+    \item \textbf{Ordinary Power Conversion:} $x^n = \sum_{k = 0}^{n} \genfrac{\{}{\}}{0pt}{}{n}{k} x^{\underline{k}} = \sum_{k = 0}^{n} \genfrac{\{}{\}}{0pt}{}{n}{k} k! \binom{x}{k}$
+    \item \textbf{Column OGF (Fixed $k$):} $\sum_{n = k}^{\infty} \genfrac{\{}{\}}{0pt}{}{n}{k} x^n = \dfrac{x^k}{(1 - x)(1 - 2x)\cdots(1 - kx)}$
+    \item \textbf{Column EGF (Fixed $k$):} $\sum_{n = k}^{\infty} \genfrac{\{}{\}}{0pt}{}{n}{k} \dfrac{x^n}{n!} = \dfrac{(e^x - 1)^k}{k!}$
+\end{itemize}
+
+\subsubsection*{Identities \& Duality}
+\begin{itemize}
+    \item \textbf{Bell Numbers (Total partitions of $n$):} $B_n = \sum_{k = 0}^{n} \genfrac{\{}{\}}{0pt}{}{n}{k}$, with EGF $\sum_{n = 0}^{\infty} B_n \dfrac{x^n}{n!} = e^{e^x - 1}$
+    \item \textbf{Stirling Inversion:} $f(n) = \sum_{k = 0}^{n} \genfrac{\{}{\}}{0pt}{}{n}{k} g(k) \iff g(n) = \sum_{k = 0}^{n} (-1)^{n - k} \genfrac{[}{]}{0pt}{}{n}{k} f(k)$
+    \item \textbf{Orthogonality:} $\sum_{k = m}^{n} (-1)^{n - k} \genfrac{[}{]}{0pt}{}{n}{k} \genfrac{\{}{\}}{0pt}{}{k}{m} = \sum_{k = m}^{n} (-1)^{k - m} \genfrac{\{}{\}}{0pt}{}{n}{k} \genfrac{[}{]}{0pt}{}{k}{m} = [n = m]$
+\end{itemize}

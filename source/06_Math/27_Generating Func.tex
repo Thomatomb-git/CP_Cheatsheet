@@ -1,0 +1,51 @@
+\subsubsection*{Common OGF Sums}
+\begin{itemize}
+    \item $\displaystyle \sum_{k = 0}^{\infty} x^k = \dfrac{1}{1 - x}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} k x^k = \dfrac{x}{(1 - x)^2}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \binom{k}{M} x^k = \dfrac{x^M}{(1 - x)^{M + 1}}$
+    \item $\displaystyle \sum_{k = 0}^{M} \binom{M}{k} x^k = (1 + x)^M$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \binom{M + k}{k} x^k = \dfrac{1}{(1 - x)^{M + 1}}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} x^{2k} = \dfrac{1}{1 - x^2}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} c^k x^k = \dfrac{1}{1 - cx}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \dfrac{x^k}{k!} = e^x$
+    \item $\displaystyle \sum_{k = 1}^{\infty} \dfrac{x^k}{k} = \ln \dfrac{1}{1 - x}$
+    \item $\displaystyle \sum_{k = 1}^{\infty} H_k x^k = \dfrac{1}{1 - x} \ln \dfrac{1}{1 - x}$
+    \item $\displaystyle \sum_{k = 1}^{\infty} k H_{k - 1} x^k = \dfrac{x}{(1 - x)^2} \ln \dfrac{1}{1 - x}$ \quad \textit{(Note: $H_0 = 0$)}
+\end{itemize}
+
+\subsubsection*{OGF Operations}
+\begin{itemize}
+    \item \textbf{Right shift:} $x A(x) = \sum_{n \ge 1} a_{n - 1} x^n$
+    \item \textbf{Left shift:} $\dfrac{A(x) - a_0}{x} = \sum_{n \ge 0} a_{n + 1} x^n$
+    \item \textbf{Index multiply (with shift):} \\ $A'(x) = \sum_{n \ge 0} (n + 1) a_{n + 1} x^n$ \quad \textit{(Pure: $x A'(x) = \sum_{n \ge 0} n a_n x^n$)}
+    \item \textbf{Index divide (with shift):} \\ $\int_0^x A(t) \, dt = \sum_{n \ge 1} \dfrac{a_{n - 1}}{n} x^n$
+    \item \textbf{Scaling:} $A(\lambda x) = \sum_{n \ge 0} \lambda^n a_n x^n$
+    \item \textbf{Addition:} $A(x) + B(x) = \sum_{n \ge 0} (a_n + b_n) x^n$
+    \item \textbf{Difference:} $(1 - x) A(x) = a_0 + \sum_{n \ge 1} (a_n - a_{n - 1}) x^n$
+    \item \textbf{Convolution:} \\ $A(x) B(x) = \sum_{n \ge 0} \left( \sum_{0 \le k \le n} a_k b_{n - k} \right) x^n$
+    \item \textbf{Partial sum:} \\ $\dfrac{A(x)}{1 - x} = \sum_{n \ge 0} \left( \sum_{0 \le k \le n} a_k \right) x^n$
+\end{itemize}
+
+\subsubsection*{Common EGF Sums}
+\begin{itemize}
+    \item $\displaystyle \sum_{k = 0}^{\infty} \dfrac{x^k}{k!} = e^x$
+    \item $\displaystyle \sum_{k = 0}^{\infty} k \dfrac{x^k}{k!} = x e^x$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \binom{k}{2} \dfrac{x^k}{k!} = \dfrac{1}{2} x^2 e^x$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \binom{k}{M} \dfrac{x^k}{k!} = \dfrac{1}{M!} x^M e^x$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \dfrac{x^{2k}}{(2k)!} = \dfrac{1}{2}(e^x + e^{-x})$
+    \item $\displaystyle \sum_{k = 0}^{\infty} c^k \dfrac{x^k}{k!} = e^{cx}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} \dfrac{1}{k + 1} \dfrac{x^k}{k!} = \dfrac{e^x - 1}{x}$
+    \item $\displaystyle \sum_{k = 0}^{\infty} k! \dfrac{x^k}{k!} = \sum_{k = 0}^{\infty} x^k = \dfrac{1}{1 - x}$
+\end{itemize}
+
+\subsubsection*{EGF Operations}
+\begin{itemize}
+    \item \textbf{Right shift:} $\int_0^x A(t) \, dt = \sum_{n \ge 1} a_{n - 1} \dfrac{x^n}{n!}$
+    \item \textbf{Left shift:} $A'(x) = \sum_{n \ge 0} a_{n + 1} \dfrac{x^n}{n!}$
+    \item \textbf{Index multiply:} \\ $x A(x) = \sum_{n \ge 0} n a_{n - 1} \dfrac{x^n}{n!}$ \quad \textit{(Pure: $x A'(x) = \sum_{n \ge 0} n a_n \frac{x^n}{n!}$)}
+    \item \textbf{Index divide:} $\dfrac{A(x) - A(0)}{x} = \sum_{n \ge 0} \dfrac{a_{n + 1}}{n + 1} \dfrac{x^n}{n!}$
+    \item \textbf{Addition:} $A(x) + B(x) = \sum_{n \ge 0} (a_n + b_n) \dfrac{x^n}{n!}$
+    \item \textbf{Difference:} $A'(x) - A(x) = \sum_{n \ge 0} (a_{n + 1} - a_n) \dfrac{x^n}{n!}$
+    \item \textbf{Binomial convolution:}\\  $A(x) B(x) = \sum_{n \ge 0} \left( \sum_{0 \le k \le n} \binom{n}{k} a_k b_{n - k} \right) \dfrac{x^n}{n!}$
+    \item \textbf{Binomial sum:}\\ $e^x A(x) = \sum_{n \ge 0} \left( \sum_{0 \le k \le n} \binom{n}{k} a_k \right) \dfrac{x^n}{n!}$
+\end{itemize}
