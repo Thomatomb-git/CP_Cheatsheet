@@ -1,81 +1,145 @@
-// Algoritma Dinic dengan teknik Capacity Scaling untuk mencari Maximum Network Flow pada graf berarah/tak berarah.
-// O(V * E * log(MaxFlow)) dengan scaling, O(E * sqrt(V)) pada bipartite matching.
-typedef long long ll;
+struct Dinic{
+  struct edge{
+    ll u, v;
+    ll flow, capacity;
 
-const ll INF = 1e18;
-
-struct Dinic {
-  struct Edge {
-    int v;
-    ll cap, flow;
-    Edge(int _v, ll _cap): v(_v), cap(_cap), flow(0) {}
-  };
-
-  int n;
-  ll lim;
-  vector<vector<int>> gr;
-  vector<Edge> e;
-  vector<int> idx, lv;
-
-  bool has_path(int s, int t) {
-    queue<int> q;
-    q.push(s);
-    lv.assign(n, -1);
-    lv[s] = 0;
-    while(!q.empty()) {
-      int c = q.front();
-      q.pop();
-      if(c == t)
-        break;
-      for(auto& i : gr[c]) {
-        ll cur_flow = e[i].cap - e[i].flow;
-        if(lv[e[i].v] == -1 && cur_flow >= lim) {
-          lv[e[i].v] = lv[c] + 1;
-          q.push(e[i].v);
-        }
-      }
+    edge(ll u, ll v, ll cap)
+    {
+      this->u = u;
+      this->v = v;
+      this->flow = 0;
+      this-> capacity = cap;
     }
-    return lv[t] != -1;
+  };
+  vector<edge> edgeList;
+  vector<vector<ll>> adjList;
+  vector<ll> level;
+  vector<ll> nextID;
+  ll n, s, t;
+  ll currID = 0;
+
+  Dinic(ll n, ll s, ll t)
+  {
+    this->n = n;
+    this->s = s;
+    this->t = t;
+
+    adjList.resize(n);
+    level.resize(n);
+    nextID.resize(n);
   }
 
-  ll get_flow(int s, int t, ll left) {
-    if(!left || s == t)
-      return left;
-    while(idx[s] < (int) gr[s].size()) {
-      int i = gr[s][idx[s]];
-      if(lv[e[i].v] == lv[s] + 1) {
-        ll add = get_flow(e[i].v, t, min(left, e[i].cap - e[i].flow));
-        if(add) {
-          e[i].flow += add;
-          e[i ^ 1].flow -= add;
-          return add;
-        }
+  void addEdge(ll u, ll v, ll cap)
+  {
+    edgeList.push_back(edge(u, v, cap));
+    edgeList.push_back(edge(v, u, 0));
+
+    adjList[u].push_back(currID);
+    adjList[v].push_back(currID + 1);
+    currID += 2;
+  }
+
+  bool bfs()
+  {
+    level.assign(n, -1);
+    queue<ll> q;
+    q.push(s);
+    level[s] = 0;
+
+    while(!q.empty())
+    {
+      ll curr = q.front(); q.pop();
+
+      for(auto next : adjList[curr])
+      {
+        auto& [u, v, flow, capacity] = edgeList[next];
+        ll available = capacity - flow;
+        if(available == 0 || level[v] != -1) continue;
+        level[v] = level[u] + 1;
+        q.push(v); 
       }
-      ++idx[s];
     }
+
+    return level[t] != -1;
+  }
+
+  ll dfs(ll curr, ll bottleneck)
+  {
+    if(curr == t) return bottleneck;
+    for(ll& i = nextID[curr]; i < adjList[curr].size(); ++i)
+    {
+      ll id = adjList[curr][i];
+      auto& [u, v, flow, capacity] = edgeList[id];
+      ll available = capacity - flow;
+      if(available == 0 || level[v] != level[u] + 1) continue;
+      ll nextFlow = dfs(v, min(bottleneck, available));
+
+      if(nextFlow == 0) continue;
+      edgeList[id].flow += nextFlow;
+      edgeList[id ^ 1].flow -= nextFlow;
+
+      return nextFlow;
+    }
+
     return 0;
   }
 
-  Dinic(int vertices, bool scaling = 1) :
-    n(vertices), lim(scaling ? (1LL << 60) : 1), gr(n) {}
+  ll maxFlow()
+  {
+    ll mxFlow = 0;
+    while(true)
+    {
+      if(!bfs()) break;
+      nextID.assign(n, 0);
+      while(true)
+      {
+        ll flow = dfs(s, 1e18);
+        if(flow == 0) break;
+        mxFlow += flow;
+      }
+    }
 
-  void add_edge(int from, int to, ll cap, bool directed = 1) {
-    gr[from].push_back(e.size());
-    e.emplace_back(to, cap);
-    gr[to].push_back(e.size());
-    e.emplace_back(from, directed ? 0 : cap);
+    return mxFlow;
   }
 
-  ll get_max_flow(int s, int t) {
-    ll res = 0;
-    while(lim) {
-      while(has_path(s, t)) {
-        idx.assign(n, 0);
-        while(ll add = get_flow(s, t, INF))
-          res += add;
+  vector<pair<ll, ll>> cutEdges()
+  {
+    queue<ll> q;
+    q.push(s);
+
+    vector<bool> sourceCC(n, false);
+    sourceCC[s] = true;
+
+    while(!q.empty())
+    {
+      ll curr = q.front(); q.pop();
+
+      for(auto next : adjList[curr])
+      {
+        auto& [u, v, flow, capacity] = edgeList[next];
+        ll available = capacity - flow;
+        if(available == 0 || sourceCC[v] == true) continue;
+        sourceCC[v] = true;
+        q.push(v);
       }
-      lim >>= 1;
     }
-    return res;
+
+    vector<pair<ll, ll>> ret;
+    vector<ll> taken(n, -1);
+    for(int i = 0; i < n; ++i)
+    {
+      if(!sourceCC[i]) continue;
+      for(auto next : adjList[i])
+      {
+        auto& [u, v, flow, capacity] = edgeList[next];
+        if(!sourceCC[v] && taken[v] != i)
+        {
+            ret.push_back({u, v});
+            taken[v] = i;
+        }
+      }
+    }
+
+    return ret;
   }
 };
