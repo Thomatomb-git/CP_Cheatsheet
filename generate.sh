@@ -25,8 +25,8 @@ gen_clean() {
 
 # generate
 gen_generate() {
-    python build.py > contents.tex
-    ./format.sh
+    python reorder.py || return 1
+    python build.py > contents.tex || return 1
     mkdir --parents "${BUILD_DIR}"
 
     xelatex --shell-escape ${LATEX_OPTION_QUIET} ${LATEX_OPTION} \

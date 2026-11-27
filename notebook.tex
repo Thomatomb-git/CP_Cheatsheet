@@ -24,7 +24,42 @@
 \setlength{\parindent}{0mm}
 \setlength{\parskip}{0mm}
 \setlength{\baselineskip}{0mm}
-\usepackage{color}
+\usepackage{xcolor}
+
+% ====================================================================================================
+% Team Info
+\newcommand{\teamname}{New CP Leak}
+\newcommand{\university}{BINUS University}
+
+\newcommand{\memberone}{Frederick Kamsono}
+\newcommand{\membertwo}{Christian Brandon}
+\newcommand{\memberthree}{Nathanael Gustav Pratama}
+
+% Codeforces Handles (uncomment these and the handle line in \teammember to show)
+% \newcommand{\handleone}{\textbf{\textcolor[HTML]{03A8B5}{Handle1}}}
+% \newcommand{\handletwo}{\textbf{\textcolor[HTML]{0000FF}{Handle2}}}
+% \newcommand{\handlethree}{\textbf{\textcolor[HTML]{008000}{Handle3}}}
+
+\newcommand{\teammember}[2]{%
+  \begin{minipage}[t]{0.32\linewidth}
+    \centering
+    {\small #1}%
+    % \\ {\scriptsize #2}
+  \end{minipage}%
+}
+
+\newcommand{\maketeamheader}{%
+  {\centering
+    {\large\textbf{\teamname}}\\[0.5mm]
+    {\small\university}\\[1.5mm]
+    \teammember{\memberone}{\handleone}\hfill
+    \teammember{\membertwo}{\handletwo}\hfill
+    \teammember{\memberthree}{\handlethree}\par
+  }
+  \vskip1.5mm
+  \hrule
+  \vskip1mm
+}
 
 % ====================================================================================================
 % Header and Footer
@@ -84,13 +119,12 @@
 }
 
 % ====================================================================================================
-% xcolor
-\usepackage{xcolor}
-
-% ====================================================================================================
 % Documents
 \begin{document}
 \begin{landscape}
+
+% Team Header
+\maketeamheader
 
 % Contents
 \begin{multicols}{3}
