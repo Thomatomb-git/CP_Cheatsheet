@@ -84,7 +84,8 @@ struct XorBasis {
         }
 
         ll num_distinct = (1LL << (ll)v.size());
-        if (k > num_distinct) return -1; // k melebihi jumlah kombinasi unik
+        if (k < 1 || k > num_distinct) return -1; // k di luar rentang [1, num_distinct]
+        k--; // konversi 1-indexed ke 0-indexed
 
         ll ans = 0;
         for (ll i = 0; i < (ll)v.size(); ++i) {

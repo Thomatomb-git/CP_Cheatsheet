@@ -29,7 +29,7 @@ struct SuffixArray{
     }
 
     SuffixArray(string s){
-        s += '\$';
+        s += '\0';
         this->sz = s.size();
         vector<ll> c(sz);
         arr.resize(sz);
