@@ -1,96 +1,94 @@
-// HLD pada Tree 1-based index untuk path update, path query, dan subtree update/query.
-// Path Query/Update O(log^2 N), Subtree Query/Update O(log N).
-struct Segtree {
-    int n;
-    vector<int> t;
-    void init(int sz) { n = sz; t.assign(4 * n, 0); }
-    void update(int l, int r, int x) { /* custom update */ }
-    int query(int l, int r) { return 0; /* custom query */ }
-};
+// Node Value Based HLD
+struct HLD{
+    vector<vector<ll>> adj;
+    vector<ll> subtreeSize, depth, nodeID, topChain, parentNode;
+    lazySegtree segTree;
 
-class HLD {
-private:
-    vector<vector<int>> adj;
-    vector<int> sz, in, out, nxt, par, depth;
-    Segtree DS;
-    int timer = -1;
+    HLD(ll n){
+        adj.resize(n);
+        depth.resize(n);
+        nodeID.resize(n);
+        topChain.resize(n);
+        parentNode.assign(n, -1); 
+        subtreeSize.assign(n, 1);
+        segTree.init(n);
 
-    void dfs_sz(int u, int p = 0, int d = 0) {
-        sz[u] = 1;
-        par[u] = p;
-        depth[u] = d;
-        for(auto &v : adj[u]) {
-            if(v != p) {
-                dfs_sz(v, u, d + 1);
-                sz[u] += sz[v];
-            }
-        }
-        for(auto &v : adj[u]) {
-            if(v != p && (adj[u][0] == p || sz[v] > sz[adj[u][0]])) {
-                swap(v, adj[u][0]);
-            }
+        for(int i = 0; i < n; ++i){
+            topChain[i] = i;
         }
     }
 
-    void dfs_hld(int u, int p = 0) {
-        in[u] = ++timer;
-        for(auto &v : adj[u]) {
-            if(v != p) {
-                nxt[v] = (v == adj[u][0] ? nxt[u] : v);
-                dfs_hld(v, u);
+    void dfs(ll curr, ll parent){
+        for(auto next : adj[curr]){
+            if(next == parent) continue;
+            depth[next] = depth[curr] + 1;
+            parentNode[next] = curr;
+            dfs(next, curr);
+            subtreeSize[curr] += subtreeSize[next];
+        }
+    }
+    ll currentnodeID = 0;
+    void nodeIDAssign(ll curr, ll parent){
+        nodeID[curr] = currentnodeID++; 
+        ll heavyNode = -1;
+        for(auto next : adj[curr]){
+            if(next == parent) continue;
+            if(heavyNode == -1 || subtreeSize[next] > subtreeSize[heavyNode]){
+                heavyNode = next;
             }
         }
-        out[u] = timer;
+        if(heavyNode != -1){
+            topChain[heavyNode] = topChain[curr];
+            nodeIDAssign(heavyNode, curr);
+        }
+
+        for(auto next : adj[curr]){
+            if(next == parent || next == heavyNode) continue;
+            nodeIDAssign(next, curr);
+        }
     }
 
-public:
-    HLD(int n) {
-        adj.assign(n + 1, vector<int>());
-        sz.assign(n + 1, 0);
-        in.resize(n + 1);
-        out.resize(n + 1);
-        nxt.assign(n + 1, 0);
-        par.assign(n + 1, 0);
-        depth.assign(n + 1, 0);
+    void init(){
+        dfs(0, -1);
+        nodeIDAssign(0, -1);
     }
 
-    void add_edge(int u, int v) {
+    void addEdge(ll u, ll v){
         adj[u].push_back(v);
         adj[v].push_back(u);
     }
 
-    void init(int root = 1) {
-        dfs_sz(root, 0, 0);
-        nxt[root] = root;
-        dfs_hld(root, 0);
-        DS.init(timer + 1);
+    void updateValue(ll node, ll val){
+        segTree.update(1, 0, segTree.N - 1, nodeID[node], nodeID[node], val);
     }
 
-    void update_path(int u, int v, int x) {
-        for(; nxt[u] != nxt[v]; v = par[nxt[v]]) {
-            if(depth[nxt[u]] > depth[nxt[v]]) swap(u, v);
-            DS.update(in[nxt[v]], in[v], x);
+    void updatePathValue(ll u, ll v, ll val){
+        while(topChain[u] != topChain[v]){
+            if(depth[topChain[u]] < depth[topChain[v]]) swap(u, v);
+            segTree.update(1, 0, segTree.N - 1, nodeID[topChain[u]], nodeID[u], val);
+            u = parentNode[topChain[u]];
         }
         if(depth[u] > depth[v]) swap(u, v);
-        DS.update(in[u], in[v], x);
+        segTree.update(1, 0, segTree.N - 1, nodeID[u], nodeID[v], val);
     }
 
-    int query_path(int u, int v) {
-        int ans = 0;
-        for(; nxt[u] != nxt[v]; v = par[nxt[v]]) {
-            if(depth[nxt[u]] > depth[nxt[v]]) swap(u, v);
-            ans = max(ans, DS.query(in[nxt[v]], in[v]));
+    void updateSubtreeValue(ll u, ll val){
+        segTree.update(1, 0, segTree.N - 1, nodeID[u], nodeID[u] + subtreeSize[u] - 1, val);
+    }
+
+    Node queryPath(ll u, ll v){
+        Node result = {0, (ll)-1e18, (ll)1e18};
+        while(topChain[u] != topChain[v]){
+            if(depth[topChain[u]] < depth[topChain[v]]) swap(u, v);
+            result = segTree.combine(result, segTree.query(1, 0, segTree.N - 1, nodeID[topChain[u]], nodeID[u]));
+            u = parentNode[topChain[u]];
         }
         if(depth[u] > depth[v]) swap(u, v);
-        ans = max(ans, DS.query(in[u], in[v]));
-        return ans;
+        result = segTree.combine(result, segTree.query(1, 0, segTree.N - 1, nodeID[u], nodeID[v]));
+        return result;
     }
 
-    void update_subtree(int u, int x) {
-        DS.update(in[u], out[u], x);
-    }
-
-    int query_subtree(int u) {
-        return DS.query(in[u], out[u]);
+    Node querySubtree(ll u){
+        return segTree.query(1, 0, segTree.N - 1, nodeID[u], nodeID[u] + subtreeSize[u] - 1);
     }
 };
